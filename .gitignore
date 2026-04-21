@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Environment files
+.env
+.env.servidor
+.env.local
+.env.*.local
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+tmp_cookie*.txt
+
+# Test
+coverage/
+.pytest_cache/
+
+# Docker
+*.pem
+
+# Generated PDFs
+generated_pdfs/
+
+# Database backups
+backups/
+backup/
+*.dump
+
+# Database
+*.db
+*.sqlite3

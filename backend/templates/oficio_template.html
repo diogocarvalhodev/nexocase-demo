@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento Oficial - {{ processo_numero }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm 2cm 2cm 2cm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            color: #000;
+        }
+        
+        /* ==================== CABEÇALHO INSTITUCIONAL ==================== */
+        .header {
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #1e40af;
+            padding-bottom: 15px;
+            page-break-inside: avoid;
+        }
+        
+        .header-logo {
+            display: table-cell;
+            width: 120px;
+            vertical-align: middle;
+            padding-right: 20px;
+        }
+        
+        .logo-image {
+            width: 100px;
+            height: auto;
+            max-height: 100px;
+            object-fit: contain;
+        }
+        
+        .logo-placeholder {
+            width: 70px;
+            height: 70px;
+            border: 2px solid #1e40af;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+        
+        .logo-placeholder span {
+            color: white;
+            font-size: 10pt;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .header-text {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        
+        .header-estado {
+            font-size: 11pt;
+            color: #374151;
+            font-weight: normal;
+            margin-bottom: 2px;
+        }
+        
+        .header-prefeitura {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .header-secretaria {
+            font-size: 11pt;
+            color: #1f2937;
+            margin-bottom: 2px;
+        }
+        
+        .header-cco {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #1e40af;
+        }
+        
+        /* ==================== INFORMAÇÕES DO DOCUMENTO ==================== */
+        .document-meta {
+            text-align: right;
+            margin-bottom: 25px;
+            font-size: 11pt;
+        }
+        
+        .document-meta p {
+            margin-bottom: 3px;
+        }
+        
+        .processo-numero {
+            font-weight: bold;
+            font-size: 12pt;
+            color: #1e40af;
+        }
+        
+        /* ==================== TÍTULO DO DOCUMENTO ==================== */
+        .document-title {
+            text-align: center;
+            margin: 30px 0;
+            page-break-after: avoid;
+        }
+        
+        .document-title h1 {
+            font-size: 14pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #1e40af;
+            display: inline-block;
+            padding-bottom: 5px;
+            page-break-after: avoid;
+        }
+        
+        /* ==================== DESTINATÁRIO ==================== */
+        .destinatario {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+        
+        .dest-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .dest-content {
+            font-style: italic;
+        }
+        
+        /* ==================== CORPO DO DOCUMENTO ==================== */
+        .corpo-texto {
+            text-align: justify;
+            text-indent: 2cm;
+            margin-bottom: 15px;
+        }
+        
+        /* ==================== QUADRO DE INFORMAÇÕES ==================== */
+        .info-box {
+            border: 1px solid #d1d5db;
+            margin: 20px 0;
+            background-color: #fafafa;
+            page-break-inside: avoid;
+        }
+        
+        .info-box-header {
+            background-color: #1e40af;
+            color: white;
+            padding: 8px 15px;
+            font-weight: bold;
+            font-size: 11pt;
+            text-transform: uppercase;
+            page-break-after: avoid;
+        }
+        
+        .info-box-content {
+            padding: 0;
+        }
+        
+        .info-row {
+            display: table;
+            width: 100%;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            display: table-cell;
+            width: 180px;
+            padding: 10px 15px;
+            background-color: #f3f4f6;
+            font-weight: bold;
+            font-size: 11pt;
+            vertical-align: middle;
+            border-right: 1px solid #e5e7eb;
+        }
+        
+        .info-value {
+            display: table-cell;
+            padding: 10px 15px;
+            font-size: 11pt;
+            vertical-align: middle;
+        }
+        
+        /* ==================== BADGES DE IMPACTO ==================== */
+        .impact-badge {
+            display: inline-block;
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .impact-baixo {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+        
+        .impact-medio {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fcd34d;
+        }
+        
+        .impact-alto {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        
+        /* ==================== SEÇÕES DE TEXTO ==================== */
+        .section {
+            margin: 25px 0;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            font-size: 11pt;
+            color: #1e40af;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #1e40af;
+            page-break-after: avoid;
+        }
+        
+        .section-content {
+            text-align: justify;
+            line-height: 1.6;
+            padding: 15px;
+            background-color: #fefefe;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            min-height: 60px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .section-content.preformatted {
+            white-space: pre-wrap;
+        }
+        
+        /* ==================== ASSINATURA ==================== */
+        .signature-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .local-data {
+            text-align: right;
+            margin-bottom: 50px;
+            font-size: 11pt;
+        }
+        
+        .signature-box {
+            display: inline-block;
+            text-align: center;
+            min-width: 350px;
+        }
+        
+        .signature-line {
+            border-top: 1px solid #000;
+            padding-top: 8px;
+        }
+        
+        .signature-name {
+            font-weight: bold;
+            font-size: 12pt;
+        }
+        
+        .signature-role {
+            font-size: 10pt;
+            color: #4b5563;
+            margin-top: 3px;
+        }
+        
+        /* ==================== RODAPÉ ==================== */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 8pt;
+            color: #6b7280;
+            border-top: 2px solid #1e40af;
+            padding-top: 10px;
+            background-color: #fff;
+            margin: 0 -2cm;
+            padding-left: 2cm;
+            padding-right: 2cm;
+        }
+        
+        .footer-line {
+            margin-bottom: 2px;
+        }
+        
+        .footer-sistema {
+            font-style: italic;
+            color: #9ca3af;
+            margin-top: 5px;
+        }
+        
+        /* ==================== WATERMARK PARA ALTO IMPACTO ==================== */
+        {% if nivel_impacto == 'Alto' %}
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 100pt;
+            color: rgba(239, 68, 68, 0.08);
+            font-weight: bold;
+            z-index: -1;
+            white-space: nowrap;
+        }
+        {% endif %}
+    </style>
+</head>
+<body>
+    {% if nivel_impacto == 'Alto' %}
+    <div class="watermark">ALTO IMPACTO</div>
+    {% endif %}
+    
+    <!-- CABEÇALHO INSTITUCIONAL -->
+    <div class="header">
+        <div class="header-logo">
+            {% if logo_base64 %}
+            <img src="{{ logo_base64 }}" alt="Logo" class="logo-image">
+            {% else %}
+            <div class="logo-placeholder">
+                <span>NC</span>
+            </div>
+            {% endif %}
+        </div>
+        <div class="header-text">
+            <div class="header-estado">Brasil</div>
+            <div class="header-prefeitura">{{ organizacao }}</div>
+            <div class="header-secretaria">{{ departamento }}</div>
+            <div class="header-cco">Sistema de Ocorrencias</div>
+        </div>
+    </div>
+    
+    <!-- INFORMAÇÕES DO DOCUMENTO -->
+    <div class="document-meta">
+        <p class="processo-numero">Ofício Nº {{ processo_numero }}</p>
+        <p>{{ cidade_label }}, {{ data_extenso_download }}</p>
+    </div>
+    
+    <!-- TÍTULO -->
+    <div class="document-title">
+        <h1>Relatório de Ocorrência</h1>
+    </div>
+    
+    <!-- QUADRO: IDENTIFICAÇÃO -->
+    <div class="info-box">
+        <div class="info-box-header">1. Identificação da Unidade Escolar</div>
+        <div class="info-box-content">
+            <div class="info-row">
+                <div class="info-label">Unidade Escolar</div>
+                <div class="info-value">{{ unidade_escolar }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Endereço</div>
+                <div class="info-value">{{ endereco_escola }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Local da Ocorrência</div>
+                <div class="info-value">{{ localizacao_interna }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Data do Registro</div>
+                <div class="info-value">{{ data_formatada }}</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- QUADRO: CLASSIFICAÇÃO -->
+    <div class="info-box">
+        <div class="info-box-header">2. Classificação do Incidente</div>
+        <div class="info-box-content">
+            <div class="info-row">
+                <div class="info-label">Setor</div>
+                <div class="info-value">{{ categoria }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Nível de Impacto</div>
+                <div class="info-value">
+                    {% if nivel_impacto == 'Baixo' %}
+                    <span class="impact-badge impact-baixo">{{ nivel_impacto }}</span>
+                    {% elif nivel_impacto == 'Médio' %}
+                    <span class="impact-badge impact-medio">{{ nivel_impacto }}</span>
+                    {% else %}
+                    <span class="impact-badge impact-alto">{{ nivel_impacto }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if texto_oficio %}
+    <!-- SEÇÃO: TEXTO DO OFÍCIO -->
+    <div class="section">
+        <div class="section-title">Texto do Ofício</div>
+        <div class="section-content preformatted">
+            {{ texto_oficio }}
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- SEÇÃO: DESCRIÇÃO -->
+    <div class="section">
+        <div class="section-title">3. Descrição Detalhada da Ocorrência</div>
+        <div class="section-content preformatted">
+            {{ descricao }}
+        </div>
+    </div>
+    
+    <!-- SEÇÃO: PROVIDÊNCIAS -->
+    <div class="section">
+        <div class="section-title">4. Providências Adotadas</div>
+        <div class="section-content preformatted">
+            {{ providencias }}
+        </div>
+    </div>
+    
+    <!-- ASSINATURA -->
+    <div class="signature-section">
+        <div class="local-data">
+            {{ cidade_label }}, {{ data_extenso_download }}
+        </div>
+        
+        <div class="signature-box">
+            <div class="signature-line">
+                <div class="signature-name">{{ operador_nome }}</div>
+                <div class="signature-role">Operador - Matricula: {{ operador_id }}</div>
+                <div class="signature-role">{{ requerente }}</div>
+                <div class="signature-role">{{ unidade_escolar }}</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- RODAPÉ -->
+    <div class="footer">
+        <div class="footer-line">
+            <strong>{{ requerente }}</strong>
+        </div>
+        <div class="footer-line">
+            {{ endereco_escola }}
+        </div>
+        <div class="footer-sistema">
+            Documento gerado pelo sistema - {{ ano_atual }} | Processo: {{ processo_numero }}
+        </div>
+    </div>
+</body>
+</html>

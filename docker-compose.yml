@@ -1,0 +1,102 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: nexocase_postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - nexocase_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nexocase_backend
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      ALGORITHM: ${ALGORITHM:-HS256}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-60}
+      REFRESH_TOKEN_EXPIRE_DAYS: ${REFRESH_TOKEN_EXPIRE_DAYS:-7}
+      REFRESH_COOKIE_NAME: ${REFRESH_COOKIE_NAME:-nexocase_refresh_token}
+      CSRF_COOKIE_NAME: ${CSRF_COOKIE_NAME:-nexocase_csrf_token}
+      DEFAULT_TENANT_SLUG: ${DEFAULT_TENANT_SLUG:-default}
+      TENANT_HEADER_NAME: ${TENANT_HEADER_NAME:-X-Tenant}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      COOKIE_SAMESITE: ${COOKIE_SAMESITE:-lax}
+      ENABLE_AUDIT_RETENTION_SCHEDULE: ${ENABLE_AUDIT_RETENTION_SCHEDULE:-true}
+      AUDIT_RETENTION_INTERVAL_HOURS: ${AUDIT_RETENTION_INTERVAL_HOURS:-24}
+      AUDIT_RETENTION_DEFAULT_DAYS: ${AUDIT_RETENTION_DEFAULT_DAYS:-365}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://10.129.0.162:3000}
+      ENABLE_IP_RESTRICTION: ${ENABLE_IP_RESTRICTION:-false}
+      ALLOWED_NETWORK_CIDR: ${ALLOWED_NETWORK_CIDR:-10.129.0.0/24}
+      TRUST_PROXY_HEADERS: ${TRUST_PROXY_HEADERS:-false}
+      ENABLE_HSTS: ${ENABLE_HSTS:-false}
+      RATE_LIMIT_ENABLED: ${RATE_LIMIT_ENABLED:-true}
+      RATE_LIMIT_LOGIN_REQUESTS: ${RATE_LIMIT_LOGIN_REQUESTS:-5}
+      RATE_LIMIT_LOGIN_WINDOW_SECONDS: ${RATE_LIMIT_LOGIN_WINDOW_SECONDS:-60}
+      RATE_LIMIT_ADMIN_EXPORT_REQUESTS: ${RATE_LIMIT_ADMIN_EXPORT_REQUESTS:-10}
+      RATE_LIMIT_ADMIN_EXPORT_WINDOW_SECONDS: ${RATE_LIMIT_ADMIN_EXPORT_WINDOW_SECONDS:-60}
+      RATE_LIMIT_UPLOAD_LOGO_REQUESTS: ${RATE_LIMIT_UPLOAD_LOGO_REQUESTS:-5}
+      RATE_LIMIT_UPLOAD_LOGO_WINDOW_SECONDS: ${RATE_LIMIT_UPLOAD_LOGO_WINDOW_SECONDS:-60}
+      RATE_LIMIT_DEFAULT_REQUESTS: ${RATE_LIMIT_DEFAULT_REQUESTS:-120}
+      RATE_LIMIT_DEFAULT_WINDOW_SECONDS: ${RATE_LIMIT_DEFAULT_WINDOW_SECONDS:-60}
+      ACCOUNT_LOCKOUT_ENABLED: ${ACCOUNT_LOCKOUT_ENABLED:-true}
+      MAX_FAILED_LOGIN_ATTEMPTS: ${MAX_FAILED_LOGIN_ATTEMPTS:-5}
+      ACCOUNT_LOCKOUT_MINUTES: ${ACCOUNT_LOCKOUT_MINUTES:-15}
+      PASSWORD_MAX_AGE_DAYS: ${PASSWORD_MAX_AGE_DAYS:-90}
+      DEMO_MODE: ${DEMO_MODE:-true}
+      DEMO_AUTO_SEED: ${DEMO_AUTO_SEED:-true}
+      DEMO_DISABLE_EMAIL: ${DEMO_DISABLE_EMAIL:-true}
+      UVICORN_HOST: ${UVICORN_HOST:-0.0.0.0}
+      UVICORN_PORT: ${UVICORN_PORT:-8000}
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      EMAIL_FROM: ${EMAIL_FROM}
+    volumes:
+      - ./backend:/app
+      - pdf_storage:/app/generated_pdfs
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - nexocase_network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nexocase_frontend
+    environment:
+      INTERNAL_API_URL: ${INTERNAL_API_URL:-http://backend:8000}
+      NEXT_PUBLIC_DEFAULT_TENANT: ${NEXT_PUBLIC_DEFAULT_TENANT:-default}
+      NEXT_PUBLIC_DEMO_MODE: ${NEXT_PUBLIC_DEMO_MODE:-true}
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    depends_on:
+      - backend
+    networks:
+      - nexocase_network
+    restart: unless-stopped
+
+networks:
+  nexocase_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  pdf_storage:
