@@ -49,7 +49,7 @@ const SHOWCASE_ADMIN_USER: User = {
   id: 1,
   username: 'admin',
   email: 'admin@nexocase.demo',
-  full_name: 'Showcase Admin',
+  full_name: 'Administrador Demo',
   is_active: true,
   is_admin: true,
   must_change_password: false,
@@ -57,39 +57,39 @@ const SHOWCASE_ADMIN_USER: User = {
   created_at: showcaseNow,
 };
 const SHOWCASE_ADMIN_SCHOOLS: SchoolType[] = [
-  { id: 1, name: 'North Campus', address: 'Austin, TX', phone: '(11) 4000-1001', email: 'north@nexocase.demo', is_active: true },
-  { id: 2, name: 'Operations Center', address: 'Austin, TX', phone: '(11) 4000-1002', email: 'ops@nexocase.demo', is_active: true },
-  { id: 3, name: 'South Annex', address: 'Austin, TX', phone: '(11) 4000-1003', email: 'south@nexocase.demo', is_active: false },
+  { id: 1, name: 'Unidade Norte', address: 'Sao Paulo, SP', phone: '(11) 4000-1001', email: 'norte@nexocase.demo', is_active: true },
+  { id: 2, name: 'Centro Operacional', address: 'Sao Paulo, SP', phone: '(11) 4000-1002', email: 'operacao@nexocase.demo', is_active: true },
+  { id: 3, name: 'Unidade Sul', address: 'Sao Paulo, SP', phone: '(11) 4000-1003', email: 'sul@nexocase.demo', is_active: false },
 ];
 const SHOWCASE_ADMIN_CATEGORIES: Category[] = [
-  { id: 1, name: 'Detection', description: 'Detection incidents', color: '#3b82f6', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
-  { id: 2, name: 'Infrastructure', description: 'Infrastructure and uptime', color: '#f59e0b', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
-  { id: 3, name: 'Access Control', description: 'Identity and access', color: '#10b981', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 1, name: 'Monitoramento', description: 'Eventos de monitoramento', color: '#3b82f6', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 2, name: 'Infraestrutura', description: 'Eventos de infraestrutura e disponibilidade', color: '#f59e0b', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 3, name: 'Controle de Acesso', description: 'Eventos de identidade e acesso', color: '#10b981', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
 ];
 const SHOWCASE_ADMIN_LOCATIONS: Location[] = [
-  { id: 1, name: 'SOC Console', description: 'Monitoring center', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
-  { id: 2, name: 'Core Network', description: 'Datacenter and backbone', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
-  { id: 3, name: 'Main Gate', description: 'Perimeter access', is_active: false, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 1, name: 'Central de Monitoramento', description: 'Centro de monitoramento', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 2, name: 'Nucleo de Infraestrutura', description: 'Datacenter e rede principal', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 3, name: 'Portaria Principal', description: 'Acesso ao perimetro', is_active: false, created_at: showcaseNow, updated_at: showcaseNow },
 ];
 const SHOWCASE_ADMIN_IMPACT_LEVELS: ImpactLevel[] = [
-  { id: 1, name: 'Low', description: 'Low impact', color: '#22c55e', severity: 1, is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
-  { id: 2, name: 'Medium', description: 'Moderate impact', color: '#f59e0b', severity: 2, is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
-  { id: 3, name: 'High', description: 'High impact', color: '#ef4444', severity: 3, is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 1, name: 'Baixo', description: 'Impacto baixo', color: '#22c55e', severity: 1, is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 2, name: 'Medio', description: 'Impacto moderado', color: '#f59e0b', severity: 2, is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 3, name: 'Alto', description: 'Impacto alto', color: '#ef4444', severity: 3, is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
 ];
 const SHOWCASE_ADMIN_USERS: User[] = [
   SHOWCASE_ADMIN_USER,
-  { id: 2, username: 'demo.operator', email: 'operator@nexocase.demo', full_name: 'SOC Operator', is_active: true, is_admin: false, must_change_password: false, role: 'OPERADOR', created_at: showcaseNow },
-  { id: 3, username: 'demo.director', email: 'director@nexocase.demo', full_name: 'Operations Director', is_active: true, is_admin: false, must_change_password: false, role: 'DIRETOR', escola_vinculada: 1, created_at: showcaseNow },
-  { id: 4, username: 'demo.manager', email: 'manager@nexocase.demo', full_name: 'Sector Manager', is_active: false, is_admin: false, must_change_password: false, role: 'GESTOR_SETOR', setor_vinculado: 'Infrastructure', created_at: showcaseNow },
+  { id: 2, username: 'demo.operator', email: 'operator@nexocase.demo', full_name: 'Operador de Monitoramento', is_active: true, is_admin: false, must_change_password: false, role: 'OPERADOR', created_at: showcaseNow },
+  { id: 3, username: 'demo.director', email: 'gestor@nexocase.demo', full_name: 'Gestor Operacional', is_active: true, is_admin: false, must_change_password: false, role: 'DIRETOR', escola_vinculada: 1, created_at: showcaseNow },
+  { id: 4, username: 'demo.manager', email: 'responsavel@nexocase.demo', full_name: 'Responsavel de Area', is_active: false, is_admin: false, must_change_password: false, role: 'GESTOR_SETOR', setor_vinculado: 'Infraestrutura', created_at: showcaseNow },
 ];
 const SHOWCASE_ADMIN_LOGS: ActivityLog[] = [
-  { id: 1, user_id: 1, action: 'LOGIN', entity_type: 'auth', entity_id: null, description: 'Successful login', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Showcase Admin' },
-  { id: 2, user_id: 1, action: 'UPDATE', entity_type: 'config', entity_id: 11, description: 'Updated retention interval', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Showcase Admin' },
-  { id: 3, user_id: 2, action: 'CREATE', entity_type: 'incident', entity_id: 101, description: 'Created incident NC/2026/00001', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'SOC Operator' },
-  { id: 4, user_id: 3, action: 'APPROVE', entity_type: 'incident', entity_id: 102, description: 'Approved incident NC/2026/00002', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Operations Director' },
+  { id: 1, user_id: 1, action: 'LOGIN', entity_type: 'auth', entity_id: null, description: 'Login realizado com sucesso', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Administrador Demo' },
+  { id: 2, user_id: 1, action: 'UPDATE', entity_type: 'config', entity_id: 11, description: 'Intervalo de retencao atualizado', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Administrador Demo' },
+  { id: 3, user_id: 2, action: 'CREATE', entity_type: 'incident', entity_id: 101, description: 'Ocorrencia NC/2026/00001 criada', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Operador de Monitoramento' },
+  { id: 4, user_id: 3, action: 'APPROVE', entity_type: 'incident', entity_id: 102, description: 'Ocorrencia NC/2026/00002 aprovada', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Gestor Operacional' },
 ];
 const SHOWCASE_ADMIN_CONFIGS: SystemConfig[] = [
-  { id: 1, key: 'audit_retention_enabled', value: 'true', description: 'Enable retention schedule', updated_at: showcaseNow, updated_by: 1 },
+  { id: 1, key: 'audit_retention_enabled', value: 'true', description: 'Habilitar rotina de retencao', updated_at: showcaseNow, updated_by: 1 },
   { id: 2, key: 'audit_retention_last_status', value: 'success', description: 'Last retention status', updated_at: showcaseNow, updated_by: 1 },
   { id: 3, key: 'audit_retention_last_trigger', value: 'schedule', description: 'Last trigger source', updated_at: showcaseNow, updated_by: 1 },
   { id: 4, key: 'audit_retention_last_run_at', value: showcaseNow, description: 'Last execution timestamp', updated_at: showcaseNow, updated_by: 1 },
@@ -98,12 +98,12 @@ const SHOWCASE_ADMIN_CONFIGS: SystemConfig[] = [
   { id: 7, key: 'audit_retention_last_cutoff_utc', value: showcaseNow, description: 'Last retention cutoff', updated_at: showcaseNow, updated_by: 1 },
   { id: 8, key: 'audit_retention_last_anonymized_count', value: '18', description: 'Anonymized logs', updated_at: showcaseNow, updated_by: 1 },
   { id: 9, key: 'audit_retention_last_removed_refresh_count', value: '9', description: 'Removed refresh tokens', updated_at: showcaseNow, updated_by: 1 },
-  { id: 10, key: 'oficio_header_1', value: 'NexoCase Incident Operations', description: 'Header line 1', updated_at: showcaseNow, updated_by: 1 },
-  { id: 11, key: 'oficio_header_2', value: 'Executive Response Center', description: 'Header line 2', updated_at: showcaseNow, updated_by: 1 },
-  { id: 12, key: 'oficio_footer', value: 'Documento gerado automaticamente pelo NexoCase', description: 'Footer text', updated_at: showcaseNow, updated_by: 1 },
-  { id: 13, key: 'smtp_host', value: 'smtp.showcase.local', description: 'SMTP host', updated_at: showcaseNow, updated_by: 1 },
-  { id: 14, key: 'smtp_port', value: '587', description: 'SMTP port', updated_at: showcaseNow, updated_by: 1 },
-  { id: 15, key: 'email_from', value: 'no-reply@nexocase.demo', description: 'Sender email', updated_at: showcaseNow, updated_by: 1 },
+  { id: 10, key: 'oficio_header_1', value: 'NexoCase Gestao Operacional', description: 'Cabecalho linha 1', updated_at: showcaseNow, updated_by: 1 },
+  { id: 11, key: 'oficio_header_2', value: 'Central Executiva de Resposta', description: 'Cabecalho linha 2', updated_at: showcaseNow, updated_by: 1 },
+  { id: 12, key: 'oficio_footer', value: 'Documento gerado automaticamente pelo NexoCase', description: 'Texto do rodape', updated_at: showcaseNow, updated_by: 1 },
+  { id: 13, key: 'smtp_host', value: 'smtp.demo.local', description: 'Servidor SMTP', updated_at: showcaseNow, updated_by: 1 },
+  { id: 14, key: 'smtp_port', value: '587', description: 'Porta SMTP', updated_at: showcaseNow, updated_by: 1 },
+  { id: 15, key: 'email_from', value: 'no-reply@nexocase.demo', description: 'E-mail remetente', updated_at: showcaseNow, updated_by: 1 },
 ];
 const SHOWCASE_RETENTION_HEALTH: AuditRetentionHealth = {
   status: 'healthy',
@@ -119,15 +119,15 @@ const SHOWCASE_RETENTION_HEALTH: AuditRetentionHealth = {
 };
 const SHOWCASE_TENANT_PROFILE: TenantProfile = {
   id: 1,
-  name: 'NexoCase Showcase Tenant',
+  name: 'NexoCase Demonstracao',
   slug: 'default',
   is_active: true,
   business_type: 'education',
   onboarding_completed: true,
   onboarding_completed_at: showcaseNow,
   ui_config: {
-    app_name: 'NexoCase Showcase',
-    subtitle: 'Incident Operations Demo',
+    app_name: 'NexoCase Demonstracao',
+    subtitle: 'Plataforma de Gestao Operacional',
     primary_color: '#0f766e',
     accent_color: '#f59e0b',
   },
@@ -137,14 +137,14 @@ const SHOWCASE_ACTIVE_INCIDENTS: Incident[] = [
     id: 101,
     process_number: 'NC/2026/00001',
     school_id: 1,
-    unidade_escolar: 'North Campus',
-    setor: 'Detection',
+    unidade_escolar: 'Unidade Norte',
+    setor: 'Monitoramento',
     operator_id: 2,
-    location: 'SOC Console',
-    category: 'Detection',
+    location: 'Central de Monitoramento',
+    category: 'Monitoramento',
     impact_level: 'High',
-    description: 'Unusual authentication burst detected.',
-    actions_taken: 'Blocked suspicious IP range.',
+    description: 'Pico de autenticacao fora do padrao detectado.',
+    actions_taken: 'Faixa de IP suspeita bloqueada.',
     status: 'Aguardando Validação',
     pdf_path: null,
     incident_date: showcaseNow,
@@ -157,20 +157,20 @@ const SHOWCASE_ACTIVE_INCIDENTS: Incident[] = [
     validation_note: null,
     school: SHOWCASE_ADMIN_SCHOOLS[0],
     operator: SHOWCASE_ADMIN_USERS[1],
-    validator: null,
+    validator: undefined,
   },
   {
     id: 102,
     process_number: 'NC/2026/00002',
     school_id: 2,
-    unidade_escolar: 'Operations Center',
-    setor: 'Infrastructure',
+    unidade_escolar: 'Centro Operacional',
+    setor: 'Infraestrutura',
     operator_id: 2,
-    location: 'Core Network',
-    category: 'Infrastructure',
+    location: 'Nucleo de Infraestrutura',
+    category: 'Infraestrutura',
     impact_level: 'Critical',
-    description: 'Core switch failover event.',
-    actions_taken: 'Traffic rerouted and node replaced.',
+    description: 'Evento de failover em equipamento principal.',
+    actions_taken: 'Trafego redirecionado e equipamento substituido.',
     status: 'Aprovada',
     pdf_path: '/tmp/showcase.pdf',
     incident_date: showcaseNow,
@@ -180,7 +180,7 @@ const SHOWCASE_ACTIVE_INCIDENTS: Incident[] = [
     validated_by: 3,
     validated_at: showcaseNow,
     rejection_reason: null,
-    validation_note: 'Risk contained.',
+    validation_note: 'Risco controlado.',
     school: SHOWCASE_ADMIN_SCHOOLS[1],
     operator: SHOWCASE_ADMIN_USERS[1],
     validator: SHOWCASE_ADMIN_USERS[2],
@@ -1209,7 +1209,7 @@ export default function AdminPage() {
               onClick={() => router.push('/dashboard')}
               className="px-4 py-2 text-sm text-secondary-300 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200"
             >
-              ← Dashboard
+              ← Painel
             </button>
             <button
               onClick={handleLogout}

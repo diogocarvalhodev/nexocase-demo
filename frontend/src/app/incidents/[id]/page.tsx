@@ -235,7 +235,7 @@ export default function IncidentDetailPage() {
       <main className="lg:ml-64 p-6 lg:p-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm mb-6">
-          <button onClick={() => router.push('/dashboard')} className="text-secondary-400 hover:text-secondary-600 transition-colors">Dashboard</button>
+          <button onClick={() => router.push('/dashboard')} className="text-secondary-400 hover:text-secondary-600 transition-colors">Painel</button>
           <span className="text-secondary-300">/</span>
           <button onClick={() => router.push('/incidents')} className="text-secondary-400 hover:text-secondary-600 transition-colors">{terms.incidentPlural}</button>
           <span className="text-secondary-300">/</span>

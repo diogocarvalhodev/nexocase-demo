@@ -52,9 +52,9 @@ const DASHBOARD_TERMS: Record<BusinessType, {
   education: {
     incidentSingular: 'Ocorrência',
     incidentPlural: 'Ocorrências',
-    sector: 'Setor',
-    unit: 'Escola',
-    criticalUnits: 'Escolas Críticas',
+    sector: 'Área',
+    unit: 'Unidade',
+    criticalUnits: 'Unidades Críticas',
   },
   condominium: {
     incidentSingular: 'Registro',
@@ -66,9 +66,9 @@ const DASHBOARD_TERMS: Record<BusinessType, {
   shopping: {
     incidentSingular: 'Caso',
     incidentPlural: 'Casos',
-    sector: 'Operação',
-    unit: 'Loja',
-    criticalUnits: 'Lojas Críticas',
+    sector: 'Área',
+    unit: 'Unidade',
+    criticalUnits: 'Unidades Críticas',
   },
 };
 

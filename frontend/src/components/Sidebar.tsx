@@ -39,7 +39,7 @@ export default function Sidebar() {
   const { user, logout, isAdmin } = useAuth();
   const { terms } = useTenantTerminology();
     const navigation: NavigationItem[] = [
-      { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+      { name: 'Painel', href: '/dashboard', icon: LayoutDashboard },
       { name: terms.incidentPlural, href: '/incidents', icon: FileText },
       { name: `Nova ${terms.incidentSingular}`, href: '/incidents/new', icon: PlusCircle },
       {

@@ -21,12 +21,12 @@ const TERMINOLOGY_BY_BUSINESS: Record<BusinessType, TenantTerminology> = {
   education: {
     incidentSingular: 'Ocorrência',
     incidentPlural: 'Ocorrências',
-    unitSingular: 'Escola',
-    unitPlural: 'Escolas',
-    sectorSingular: 'Setor',
-    sectorPlural: 'Setores',
-    directorRoleLabel: 'Diretor',
-    sectorManagerRoleLabel: 'Gestor de Setor',
+    unitSingular: 'Unidade',
+    unitPlural: 'Unidades',
+    sectorSingular: 'Área',
+    sectorPlural: 'Áreas',
+    directorRoleLabel: 'Gestor',
+    sectorManagerRoleLabel: 'Responsável de Área',
   },
   condominium: {
     incidentSingular: 'Registro',
@@ -41,12 +41,12 @@ const TERMINOLOGY_BY_BUSINESS: Record<BusinessType, TenantTerminology> = {
   shopping: {
     incidentSingular: 'Caso',
     incidentPlural: 'Casos',
-    unitSingular: 'Loja',
-    unitPlural: 'Lojas',
-    sectorSingular: 'Operação',
-    sectorPlural: 'Operações',
-    directorRoleLabel: 'Gestor da Loja',
-    sectorManagerRoleLabel: 'Gestor de Operação',
+    unitSingular: 'Unidade',
+    unitPlural: 'Unidades',
+    sectorSingular: 'Área',
+    sectorPlural: 'Áreas',
+    directorRoleLabel: 'Gestor',
+    sectorManagerRoleLabel: 'Responsável de Área',
   },
 };
 
@@ -76,11 +76,11 @@ export function getTerminology(businessType?: string | null): TenantTerminology 
   if (businessType && businessType in TERMINOLOGY_BY_BUSINESS) {
     return TERMINOLOGY_BY_BUSINESS[businessType as BusinessType];
   }
-  return TERMINOLOGY_BY_BUSINESS.education;
+  return TERMINOLOGY_BY_BUSINESS.condominium;
 }
 
 export function useTenantTerminology() {
-  const [businessType, setBusinessType] = useState<BusinessType>(() => getInitialTenantBusinessType() || 'education');
+  const [businessType, setBusinessType] = useState<BusinessType>(() => getInitialTenantBusinessType() || 'condominium');
   const [isReady, setIsReady] = useState<boolean>(() => Boolean(getInitialTenantBusinessType()));
 
   useEffect(() => {

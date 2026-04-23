@@ -6,7 +6,7 @@ import { useAuth } from '@/lib/auth';
 import NexoCaseLogo from '@/components/NexoCaseLogo';
 import { APP_CONFIG, DEMO_ACCOUNTS, DEMO_MODE } from '@/config/branding';
 import { LoginCredentials } from '@/types';
-import { AlertCircle, ShieldCheck, Building2, Activity, Handshake } from 'lucide-react';
+import { AlertCircle, ShieldCheck, Building2, Activity, CheckCircle } from 'lucide-react';
 
 const API_URL = '/backend';
 const SHOWCASE_MODE = process.env.NEXT_PUBLIC_SHOWCASE_MODE === 'true';
@@ -105,7 +105,7 @@ export default function LoginPage() {
               <Activity className="h-3.5 w-3.5" /> Auditoria completa
             </span>
             <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] text-secondary-200">
-              <Handshake className="h-3.5 w-3.5" /> Pronto para implantação
+              <CheckCircle className="h-3.5 w-3.5" /> Pronto para implantação
             </span>
           </div>
         </div>
@@ -197,7 +197,7 @@ export default function LoginPage() {
                 <ShieldCheck className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-white">Public Demo Accounts</h3>
+                <h3 className="text-sm font-semibold text-white">Contas da Demonstração</h3>
                 <p className="mt-1 text-sm text-secondary-300">
                   Demo de produto com dados sintéticos, fluxos de operação e perfis de acesso para apresentação comercial.
                 </p>
@@ -218,7 +218,7 @@ export default function LoginPage() {
                       <p className="mt-1 text-xs text-secondary-400">{account.description}</p>
                     </div>
                     <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-secondary-300">
-                      Autofill
+                      Preencher
                     </span>
                   </div>
                   <p className="mt-3 text-xs text-secondary-400">

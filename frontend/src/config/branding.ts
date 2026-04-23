@@ -29,27 +29,27 @@ export const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === 'true';
 
 export const DEMO_ACCOUNTS = [
   {
-    label: 'Default Admin',
+    label: 'Administrador Padrão',
     username: 'admin',
     password: 'admin',
-    description: 'Quick access account for local portfolio demos.',
+    description: 'Acesso rápido para apresentação comercial.',
   },
   {
-    label: 'Admin',
+    label: 'Administrador',
     username: 'demo.admin',
     password: 'DemoAdmin!234',
-    description: 'Full platform walkthrough: dashboards, admin panel, retention status and exports.',
+    description: 'Visão completa da plataforma: painel, administração, retenção e exportações.',
   },
   {
-    label: 'Operator',
+    label: 'Operador',
     username: 'demo.operator',
     password: 'DemoOperator!234',
-    description: 'Incident creation, monitoring workflow and operational execution path.',
+    description: 'Registro de ocorrências, monitoramento e execução operacional.',
   },
   {
-    label: 'Director',
+    label: 'Gestor',
     username: 'demo.director',
     password: 'DemoDirector!234',
-    description: 'Approval queue and business-facing incident review flow.',
+    description: 'Fluxo de validação e análise gerencial de ocorrências.',
   },
 ] as const;

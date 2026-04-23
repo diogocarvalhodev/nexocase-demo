@@ -19,7 +19,7 @@ const SHOWCASE_USER = {
   id: 1,
   username: 'admin',
   email: 'admin@nexocase.demo',
-  full_name: 'Showcase Admin',
+  full_name: 'Administrador Demo',
   is_active: true,
   is_admin: true,
   must_change_password: false,
@@ -33,7 +33,7 @@ const SHOWCASE_USERS = [
     id: 2,
     username: 'demo.operator',
     email: 'operator@nexocase.demo',
-    full_name: 'SOC Operator',
+    full_name: 'Operador de Monitoramento',
     is_active: true,
     is_admin: false,
     must_change_password: false,
@@ -43,53 +43,53 @@ const SHOWCASE_USERS = [
 ];
 
 const SHOWCASE_SCHOOLS = [
-  { id: 1, name: 'North Campus', address: 'Austin, TX', phone: null, email: null, is_active: true },
-  { id: 2, name: 'Operations Center', address: 'Austin, TX', phone: null, email: null, is_active: true },
-  { id: 3, name: 'South Annex', address: 'Austin, TX', phone: null, email: null, is_active: true },
+  { id: 1, name: 'Unidade Norte', address: 'Sao Paulo, SP', phone: null, email: null, is_active: true },
+  { id: 2, name: 'Centro Operacional', address: 'Sao Paulo, SP', phone: null, email: null, is_active: true },
+  { id: 3, name: 'Unidade Sul', address: 'Sao Paulo, SP', phone: null, email: null, is_active: true },
 ];
 
 const SHOWCASE_LOCATIONS = [
-  { id: 1, name: 'SOC Console', description: 'Primary monitoring room', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
-  { id: 2, name: 'Core Network', description: 'Datacenter and network backbone', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
-  { id: 3, name: 'Main Gate', description: 'Physical perimeter access', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+  { id: 1, name: 'Central de Monitoramento', description: 'Sala principal de monitoramento', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+  { id: 2, name: 'Nucleo de Infraestrutura', description: 'Datacenter e rede principal', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+  { id: 3, name: 'Portaria Principal', description: 'Acesso fisico ao perimetro', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
 ];
 
 const SHOWCASE_INCIDENTS = [
   {
     id: 101,
     process_number: 'NC/2026/00001',
-    school: 'North Campus',
-    setor: 'Detection',
-    impact_level: 'High',
+    school: 'Unidade Norte',
+    setor: 'Monitoramento',
+    impact_level: 'Alto',
     status: 'Fechado',
-    operator: 'SOC Operator',
+    operator: 'Operador de Monitoramento',
     created_at: new Date(Date.now() - 86400000).toISOString(),
   },
   {
     id: 102,
     process_number: 'NC/2026/00002',
-    school: 'Operations Center',
-    setor: 'Infrastructure',
-    impact_level: 'Critical',
+    school: 'Centro Operacional',
+    setor: 'Infraestrutura',
+    impact_level: 'Critico',
     status: 'Aprovada',
-    operator: 'SOC Operator',
+    operator: 'Operador de Monitoramento',
     created_at: new Date(Date.now() - 43200000).toISOString(),
   },
   {
     id: 103,
     process_number: 'NC/2026/00003',
-    school: 'South Annex',
-    setor: 'Access Control',
-    impact_level: 'Medium',
+    school: 'Unidade Sul',
+    setor: 'Controle de Acesso',
+    impact_level: 'Medio',
     status: 'Aguardando Validação',
-    operator: 'SOC Operator',
+    operator: 'Operador de Monitoramento',
     created_at: new Date(Date.now() - 7200000).toISOString(),
   },
 ];
 
 let showcaseSchools = [...SHOWCASE_SCHOOLS];
 let showcaseUsers = [...SHOWCASE_USERS];
-let showcaseIncidents = [...SHOWCASE_INCIDENTS];
+let showcaseIncidents: Array<Record<string, any>> = [...SHOWCASE_INCIDENTS];
 let showcaseOficioText = 'Comunicamos que o incidente foi devidamente registrado e tratado conforme o protocolo interno.';
 
 function buildShowcaseResponse(config: AxiosRequestConfig, data: any, status = 200): AxiosResponse {
@@ -153,15 +153,15 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
   if (method === 'get' && pathOnly === '/api/tenant/profile') {
     return Promise.resolve(buildShowcaseResponse(config, {
       id: 1,
-      name: 'NexoCase Showcase Tenant',
+      name: 'NexoCase Demonstracao',
       slug: 'default',
       is_active: true,
       business_type: 'education',
       onboarding_completed: true,
       onboarding_completed_at: new Date().toISOString(),
       ui_config: {
-        app_name: 'NexoCase Showcase',
-        subtitle: 'Incident Operations Demo',
+        app_name: 'NexoCase Demonstracao',
+        subtitle: 'Plataforma de Gestao Operacional',
         primary_color: '#0f766e',
         accent_color: '#f59e0b',
       },
@@ -170,8 +170,8 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
 
   if (method === 'get' && pathOnly === '/api/tenant/ui-config') {
     return Promise.resolve(buildShowcaseResponse(config, {
-      app_name: 'NexoCase Showcase',
-      subtitle: 'Incident Operations Demo',
+      app_name: 'NexoCase Demonstracao',
+      subtitle: 'Plataforma de Gestao Operacional',
       primary_color: '#0f766e',
       accent_color: '#f59e0b',
     }));
@@ -179,10 +179,10 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
 
   if (method === 'get' && pathOnly === '/api/options/impact-levels') {
     return Promise.resolve(buildShowcaseResponse(config, [
-      { id: 1, name: 'Low', description: 'Low impact', color: '#22c55e', severity: 1, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
-      { id: 2, name: 'Medium', description: 'Moderate impact', color: '#f59e0b', severity: 2, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
-      { id: 3, name: 'High', description: 'High impact', color: '#ef4444', severity: 3, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
-      { id: 4, name: 'Critical', description: 'Critical impact', color: '#7f1d1d', severity: 4, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+      { id: 1, name: 'Baixo', description: 'Impacto baixo', color: '#22c55e', severity: 1, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+      { id: 2, name: 'Medio', description: 'Impacto moderado', color: '#f59e0b', severity: 2, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+      { id: 3, name: 'Alto', description: 'Impacto alto', color: '#ef4444', severity: 3, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+      { id: 4, name: 'Critico', description: 'Impacto critico', color: '#7f1d1d', severity: 4, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
     ]));
   }
 
@@ -192,9 +192,9 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
 
   if (method === 'get' && pathOnly === '/api/options/categories') {
     return Promise.resolve(buildShowcaseResponse(config, [
-      { id: 1, name: 'Detection', description: 'Detection incidents', color: '#3b82f6', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
-      { id: 2, name: 'Infrastructure', description: 'Infrastructure incidents', color: '#f59e0b', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
-      { id: 3, name: 'Access Control', description: 'Identity and access', color: '#10b981', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+      { id: 1, name: 'Monitoramento', description: 'Eventos de monitoramento', color: '#3b82f6', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+      { id: 2, name: 'Infraestrutura', description: 'Eventos de infraestrutura', color: '#f59e0b', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+      { id: 3, name: 'Controle de Acesso', description: 'Eventos de identidade e acesso', color: '#10b981', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
     ]));
   }
 
@@ -210,7 +210,7 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
     const payload = typeof config.data === 'string' ? JSON.parse(config.data || '{}') : (config.data || {});
     const created = {
       id: Date.now(),
-      name: payload.name || 'New Showcase Unit',
+      name: payload.name || 'Nova Unidade Demonstracao',
       address: payload.address || null,
       phone: payload.phone || null,
       email: payload.email || null,
@@ -248,7 +248,7 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
       id: Date.now(),
       username: payload.username || 'new.user',
       email: payload.email || 'new.user@nexocase.demo',
-      full_name: payload.full_name || 'New User',
+      full_name: payload.full_name || 'Novo Usuario',
       is_active: true,
       is_admin: false,
       must_change_password: false,
@@ -283,7 +283,7 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
   if (method === 'post' && pathOnly === '/api/presets') {
     return Promise.resolve(buildShowcaseResponse(config, {
       id: Date.now(),
-      name: 'Showcase Preset',
+      name: 'Preset Demonstracao',
       config: {},
       is_favorite: false,
       created_at: new Date().toISOString(),
@@ -309,36 +309,36 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
 
   if (method === 'get' && pathOnly === '/api/dashboard/incidents-by-category') {
     return Promise.resolve(buildShowcaseResponse(config, [
-      { setor: 'Detection', count: 18 },
-      { setor: 'Infrastructure', count: 14 },
-      { setor: 'Access Control', count: 10 },
-      { setor: 'Safety', count: 6 },
+      { setor: 'Monitoramento', count: 18 },
+      { setor: 'Infraestrutura', count: 14 },
+      { setor: 'Controle de Acesso', count: 10 },
+      { setor: 'Seguranca', count: 6 },
     ]));
   }
 
   if (method === 'get' && pathOnly === '/api/dashboard/incidents-by-school') {
     return Promise.resolve(buildShowcaseResponse(config, [
-      { school: 'North Campus', count: 16 },
-      { school: 'Operations Center', count: 19 },
-      { school: 'South Annex', count: 13 },
+      { school: 'Unidade Norte', count: 16 },
+      { school: 'Centro Operacional', count: 19 },
+      { school: 'Unidade Sul', count: 13 },
     ]));
   }
 
   if (method === 'get' && pathOnly === '/api/dashboard/incidents-by-location') {
     return Promise.resolve(buildShowcaseResponse(config, [
-      { location: 'SOC Console', count: 20 },
-      { location: 'Core Network', count: 14 },
-      { location: 'Main Gate', count: 9 },
-      { location: 'Server Room', count: 5 },
+      { location: 'Central de Monitoramento', count: 20 },
+      { location: 'Nucleo de Infraestrutura', count: 14 },
+      { location: 'Portaria Principal', count: 9 },
+      { location: 'Sala de Servidores', count: 5 },
     ]));
   }
 
   if (method === 'get' && pathOnly === '/api/dashboard/incidents-by-impact') {
     return Promise.resolve(buildShowcaseResponse(config, [
-      { impact: 'Low', count: 12 },
-      { impact: 'Medium', count: 17 },
-      { impact: 'High', count: 14 },
-      { impact: 'Critical', count: 5 },
+      { impact: 'Baixo', count: 12 },
+      { impact: 'Medio', count: 17 },
+      { impact: 'Alto', count: 14 },
+      { impact: 'Critico', count: 5 },
     ]));
   }
 
@@ -363,9 +363,9 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
 
   if (method === 'get' && pathOnly === '/api/dashboard/critical-schools') {
     return Promise.resolve(buildShowcaseResponse(config, [
-      { id: 2, name: 'Operations Center', region: 'Central Zone', count: 6 },
-      { id: 1, name: 'North Campus', region: 'North Zone', count: 4 },
-      { id: 3, name: 'South Annex', region: 'South Zone', count: 3 },
+      { id: 2, name: 'Centro Operacional', region: 'Central Zone', count: 6 },
+      { id: 1, name: 'Unidade Norte', region: 'North Zone', count: 4 },
+      { id: 3, name: 'Unidade Sul', region: 'South Zone', count: 3 },
     ]));
   }
 
@@ -378,7 +378,7 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
   }
 
   if (method === 'get' && pathOnly === '/api/reports/monthly') {
-    const blob = new Blob(['Showcase monthly report'], { type: 'text/plain' });
+    const blob = new Blob(['Relatorio mensal demonstrativo'], { type: 'text/plain' });
     return Promise.resolve(buildShowcaseResponse(config, blob));
   }
 
@@ -406,13 +406,13 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
       id: Date.now(),
       process_number: `NC/2026/${String(showcaseIncidents.length + 1).padStart(5, '0')}`,
       school_id: Number(payload.school_id) || 1,
-      unidade_escolar: school?.name || 'North Campus',
-      setor: payload.setor || payload.category || 'Detection',
+      unidade_escolar: school?.name || 'Unidade Norte',
+      setor: payload.setor || payload.category || 'Monitoramento',
       operator_id: SHOWCASE_USER.id,
-      location: payload.location || 'SOC Console',
-      category: payload.category || payload.setor || 'Detection',
-      impact_level: payload.impact_level || 'Medium',
-      description: payload.description || 'Showcase generated incident',
+      location: payload.location || 'Central de Monitoramento',
+      category: payload.category || payload.setor || 'Monitoramento',
+      impact_level: payload.impact_level || 'Medio',
+      description: payload.description || 'Ocorrencia gerada na demonstracao',
       actions_taken: payload.actions_taken || null,
       status: 'Aguardando Validação',
       pdf_path: null,
@@ -439,8 +439,8 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
       ...incident,
       school_id: incident.school_id || 1,
       operator_id: incident.operator_id || SHOWCASE_USER.id,
-      location: incident.location || 'SOC Console',
-      description: incident.description || 'Showcase incident detail',
+      location: incident.location || 'Central de Monitoramento',
+      description: incident.description || 'Detalhe de ocorrencia demonstrativa',
       actions_taken: incident.actions_taken ?? null,
       pdf_path: incident.pdf_path ?? null,
       updated_at: incident.updated_at || new Date().toISOString(),
