@@ -126,8 +126,8 @@ const SHOWCASE_TENANT_PROFILE: TenantProfile = {
   onboarding_completed: true,
   onboarding_completed_at: showcaseNow,
   ui_config: {
-    app_name: 'NexoCase Demonstracao',
-    subtitle: 'Plataforma de Gestao Operacional',
+    app_name: 'NexoCase',
+    subtitle: 'Plataforma de Gestão Operacional',
     primary_color: '#0f766e',
     accent_color: '#f59e0b',
   },

@@ -1,32 +1,76 @@
-NexoCase - Licenca Proprietaria (Portfolio)
-Copyright (c) 2026 Diogo Carvalho. Todos os direitos reservados.
+NexoCase - Proprietary Portfolio Evaluation License
+License Identifier: LicenseRef-NexoCase-Portfolio-2026
+Copyright (c) 2026 Diogo Carvalho. All rights reserved.
 
-Este repositorio e disponibilizado exclusivamente para visualizacao e avaliacao tecnica de portfolio.
-Nenhuma permissao e concedida para uso, copia, reproducao, modificacao, distribuicao,
-publicacao, sublicenciamento, engenharia reversa, comercializacao ou exploracao,
-total ou parcial, deste software e de seus ativos, sem autorizacao previa e expressa,
-por escrito, do titular dos direitos autorais.
+ENGLISH VERSION
 
-E vedado, incluindo mas nao se limitando a:
-1. Utilizar o codigo-fonte, partes dele, estrutura de dados, fluxos ou templates em ambiente de producao.
-2. Reutilizar componentes, estilos, logica de negocio, APIs ou scripts para projetos de terceiros.
-3. Criar obras derivadas, forks para uso operacional, ou redistribuir este conteudo em qualquer meio.
-4. Remover, ocultar ou alterar avisos de autoria, titularidade ou restricoes de uso.
+1. Scope
+This repository is proprietary and made available for portfolio review and technical evaluation only.
 
-Autorizacao limitada:
-1. E permitida apenas a leitura do conteudo para fins de analise curricular, tecnica ou academica.
-2. Nao ha transferencia de titularidade, cessao de direitos, nem concessao de licenca implicita.
+2. Limited permission for evaluation (non-commercial)
+Subject to this license, any person may:
+- view the source code and documentation;
+- clone the repository;
+- install dependencies;
+- build and run the project locally for technical assessment;
+- perform non-commercial tests needed to evaluate architecture and engineering quality.
 
-Solicitacoes de uso:
-1. Qualquer uso alem da visualizacao depende de autorizacao formal do autor.
-2. Contato: definir canal oficial no README ou perfil profissional do autor.
+3. Prohibited uses
+Without prior express written authorization from the copyright holder, you may NOT:
+- use any part of this software in production or customer environments;
+- copy, reuse, or adapt code, assets, workflows, templates, styles, API designs, or business logic in third-party projects;
+- create derivative works for operational use;
+- redistribute, sublicense, publish, sell, or otherwise commercialize this software, in whole or in part;
+- remove or alter authorship, ownership, or license notices.
 
-ISENCAO DE GARANTIAS E RESPONSABILIDADE:
-ESTE SOFTWARE E FORNECIDO "NO ESTADO EM QUE SE ENCONTRA" ("AS IS"),
-SEM GARANTIAS DE QUALQUER TIPO, EXPRESSAS OU IMPLICITAS, INCLUINDO,
-SEM LIMITACAO, GARANTIAS DE COMERCIALIZACAO, ADEQUACAO A FINALIDADE ESPECIFICA
-E NAO INFRACAO. EM NENHUMA HIPOTESE O AUTOR SERA RESPONSAVEL POR QUAISQUER DANOS,
-PERDAS OU RECLAMACOES DECORRENTES DO USO, TENTATIVA DE USO OU IMPOSSIBILIDADE DE USO
-DO SOFTWARE.
+4. No transfer of rights
+This license does not transfer ownership, copyright, trademark, patent rights, or any implied license.
 
-Ao acessar este repositorio, o usuario declara ciencia e concordancia com estes termos.
+5. Commercial or extended usage requests
+Any usage beyond Section 2 requires prior written authorization.
+Contact: diogocarvalhomaia@gmail.com
+
+6. Disclaimer of warranties and limitation of liability
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM,
+DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE,
+ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+
+VERSAO EM PORTUGUES
+
+1. Escopo
+Este repositorio e proprietario e disponibilizado apenas para revisao de portfolio e avaliacao tecnica.
+
+2. Permissao limitada para avaliacao (nao comercial)
+Sujeito a esta licenca, qualquer pessoa pode:
+- visualizar o codigo-fonte e a documentacao;
+- clonar o repositorio;
+- instalar dependencias;
+- compilar e executar o projeto localmente para avaliacao tecnica;
+- realizar testes nao comerciais necessarios para avaliar arquitetura e qualidade de engenharia.
+
+3. Usos proibidos
+Sem autorizacao previa e expressa, por escrito, do titular dos direitos autorais, NAO e permitido:
+- usar qualquer parte deste software em producao ou ambientes de clientes;
+- copiar, reutilizar ou adaptar codigo, ativos, fluxos, templates, estilos, desenho de APIs ou logica de negocio em projetos de terceiros;
+- criar obras derivadas para uso operacional;
+- redistribuir, sublicenciar, publicar, vender ou comercializar este software, no todo ou em parte;
+- remover ou alterar avisos de autoria, titularidade ou licenca.
+
+4. Sem transferencia de direitos
+Esta licenca nao transfere titularidade, direitos autorais, marcas, patentes ou qualquer licenca implicita.
+
+5. Solicitacoes de uso comercial ou ampliado
+Qualquer uso alem da Secao 2 depende de autorizacao previa por escrito.
+Contato: diogocarvalhocrf@outlook.com
+
+6. Isencao de garantias e limitacao de responsabilidade
+ESTE SOFTWARE E FORNECIDO "NO ESTADO EM QUE SE ENCONTRA" ("AS IS"), SEM GARANTIAS
+DE QUALQUER TIPO, EXPRESSAS OU IMPLICITAS, INCLUINDO, MAS NAO SE LIMITANDO,
+A COMERCIALIZACAO, ADEQUACAO A FINALIDADE ESPECIFICA E NAO INFRACAO.
+EM NENHUMA HIPOTESE O AUTOR SERA RESPONSAVEL POR QUALQUER RECLAMACAO,
+DANO OU OUTRA RESPONSABILIDADE, SEJA EM ACAO CONTRATUAL, EXTRACONTRATUAL
+OU DE OUTRA NATUREZA, DECORRENTE DE, OU RELACIONADA A, ESTE SOFTWARE
+OU AO USO OU OUTRAS OPERACOES COM ESTE SOFTWARE.

@@ -160,7 +160,7 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
       onboarding_completed: true,
       onboarding_completed_at: new Date().toISOString(),
       ui_config: {
-        app_name: 'NexoCase Demonstracao',
+        app_name: 'NexoCase',
         subtitle: 'Plataforma de Gestao Operacional',
         primary_color: '#0f766e',
         accent_color: '#f59e0b',
@@ -170,7 +170,7 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
 
   if (method === 'get' && pathOnly === '/api/tenant/ui-config') {
     return Promise.resolve(buildShowcaseResponse(config, {
-      app_name: 'NexoCase Demonstracao',
+      app_name: 'NexoCase',
       subtitle: 'Plataforma de Gestao Operacional',
       primary_color: '#0f766e',
       accent_color: '#f59e0b',

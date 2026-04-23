@@ -1,197 +1,141 @@
 # NexoCase Demo
 
-Security-Aware Incident Operations Platform Demo for Engineering, SRE, and Cybersecurity Portfolios.
+Plataforma demo de operações de incidentes com foco em segurança, governança e execução full stack.
 
-## Overview
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000000?logo=vercel)](https://nexocase-demo.vercel.app/)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?logo=fastapi)
+![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=nextdotjs)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)
+![Interview Ready](https://img.shields.io/badge/Portfolio-Interview%20Ready-success)
 
-NexoCase Demo is a portfolio-safe version of an incident management platform designed for operational environments that need structured case intake, auditability, role-based workflows, and actionable visibility.
+Demo online: https://nexocase-demo.vercel.app/
 
-This public build is intentionally curated to demonstrate production-style engineering decisions without exposing sensitive commercial logic, customer data, or proprietary integrations.
+Licença: uso permitido para avaliação técnica não comercial (clone, build e execução local). Reuso, redistribuição e uso comercial exigem autorização prévia por escrito. Consulte [LICENSE](LICENSE).
 
-## Problem
+Versão em inglês: [README.en.md](README.en.md)
 
-Operational teams often handle security events, infrastructure failures, and service-impacting incidents across multiple channels such as spreadsheets, email, chat, and manual logs. That creates slow response cycles, weak traceability, inconsistent classification, and poor historical visibility.
+## Triagem em 30 segundos
 
-For teams moving toward reliability engineering or security operations, the missing layer is usually not just ticket creation. It is a structured operational workflow with authentication controls, role boundaries, audit logs, retention visibility, and reporting surfaces that make incidents reviewable and defensible.
+### Problema de negócio
+Times de operação e segurança lidam com incidentes em canais fragmentados (planilha, chat, e-mail), gerando lentidão de resposta, baixa rastreabilidade e dificuldade de auditoria.
 
-## Solution
+### Solução proposta
+NexoCase centraliza o ciclo de incidente em um fluxo único: abertura estruturada, triagem por perfil, validação, auditoria e relatórios.
 
-NexoCase Demo centralizes the incident lifecycle in a single platform:
+### Impacto operacional
+- Menor tempo de resposta com fluxo padronizado
+- Maior governança com trilha auditável e políticas de retenção
+- Menor risco operacional com controles de autenticação e isolamento por tenant
 
-- structured incident creation
-- role-based validation and approval
-- dashboard analytics for operational visibility
-- activity logging and request tracing
-- export and reporting workflows
-- retention-aware health monitoring
-
-The result is a realistic demo that behaves like an internal incident operations tool while remaining safe for public GitHub distribution.
-
-## Demo Scope
-
-This repository is a demo version intended for portfolio and interview use.
-
-Included in this demo:
-
-- synthetic users, schools, incidents, and logs auto-seeded on startup
-- mocked outbound email behavior in demo mode
-- local Docker-based setup with minimal configuration
-- realistic observability and security controls already present in the application
-
-Deliberately not included:
-
-- real tenant or customer data
-- real notification routing or SMTP credentials
-- proprietary detection logic or commercial automation flows
-- private deployment assumptions or customer-specific workflows
-
-## Architecture
-
+### Arquitetura resumida
 ```text
-Next.js frontend
-                -> calls FastAPI backend through /backend
-FastAPI backend
-                -> handles auth, incident workflows, dashboard analytics, reporting, admin settings
-PostgreSQL
-                -> stores tenants, users, incidents, presets, audit logs, refresh sessions, configuration
+Next.js (frontend)
+  -> /backend
+FastAPI (API)
+  -> SQLAlchemy + Alembic
+PostgreSQL 15
 ```
 
-## Tech Stack
-
-- Backend: FastAPI, SQLAlchemy, Alembic, Pydantic
-- Frontend: Next.js 14, React, TypeScript, Tailwind CSS, Recharts
-- Database: PostgreSQL 15
-- Auth: JWT, refresh token rotation, CSRF protection
+### Stack
+- Backend: FastAPI, SQLAlchemy 2, Alembic, Pydantic
+- Frontend: Next.js 14, React 18, TypeScript, Tailwind
+- Banco: PostgreSQL 15
+- Segurança: JWT, refresh token com rotação, CSRF, rate limit, account lockout
 - Infra: Docker Compose
-- Document automation: Jinja2, WeasyPrint
 
-## Security Perspective
+## Como rodar
 
-Implemented controls already visible in the codebase include:
-
-- JWT access tokens with token version invalidation
-- refresh token rotation stored server-side
-- CSRF protection for refresh/logout flows
-- account lockout after repeated failed logins
-- request-scoped tenant isolation
-- rate limiting on sensitive routes
-- hard security headers at the API layer
-- audit retention scheduling and health reporting
-
-## Local Run
-
-### 1. Prepare environment
-
-Copy the example environment file and keep the demo defaults:
-
-```bash
-cp .env.example .env
-```
-
-On Windows PowerShell:
-
+### 1. Preparar ambiente
 ```powershell
 Copy-Item .env.example .env
 ```
 
-### 2. Start the stack
-
+### 2. Subir aplicação
 ```bash
 docker compose up --build
 ```
 
-### 3. Access the services
-
+### 3. Endpoints
 - Frontend: http://localhost:3000
-- Backend API: http://localhost:8000
-- OpenAPI docs: http://localhost:8000/docs
-- Health endpoint: http://localhost:8000/health
+- Backend: http://localhost:8000
+- Swagger: http://localhost:8000/docs
+- Health check: http://localhost:8000/health
 
-## Vercel Showcase Mode
-
-If you only want a portfolio showcase on Vercel without deploying the backend, use client-side synthetic data mode.
-
-Set these Vercel environment variables:
-
-- NEXT_PUBLIC_SHOWCASE_MODE=true
-- NEXT_PUBLIC_DEMO_MODE=true
-- NEXT_PUBLIC_DEFAULT_TENANT=default
-
-Behavior in showcase mode:
-
-- Login works with demo credentials using mocked responses
-- Dashboard, filters, charts, and sidebar counters use synthetic data
-- Report download returns a placeholder file
-- No real backend dependency for core demo flows
-
-## Deploy on Vercel
-
-This is a Next.js frontend-only deploy using client-side synthetic data (showcase mode).
-
-### 1. Import the repository in Vercel
-
-- Create a new Vercel project and connect this GitHub repository.
-- In the project settings, set **Root Directory** to `frontend`.
-
-### 2. Set environment variables in Vercel
-
-| Variable | Value |
-|---|---|
-| `NEXT_PUBLIC_SHOWCASE_MODE` | `true` |
-| `NEXT_PUBLIC_DEMO_MODE` | `true` |
-| `NEXT_PUBLIC_DEFAULT_TENANT` | `default` |
-
-### 3. Deploy
-
-- Vercel detects Next.js automatically with the `frontend/vercel.json` config.
-- No backend required: all API calls are intercepted client-side in showcase mode.
-
-### Notes
-
-- Login works with demo credentials (see Demo Accounts section).
-- Dashboard, charts, sidebar, and incident list use synthetic data.
-- For full-stack deployment with a real backend, set `NEXT_PUBLIC_SHOWCASE_MODE=false` and configure `INTERNAL_API_URL` pointing to the deployed backend.
-
-Recommended credentials for showcase mode:
-
+### Contas de demo
 - admin / admin
 - demo.admin / DemoAdmin!234
+- demo.operator / DemoOperator!234
+- demo.lead / DemoLead!234
+- demo.director / DemoDirector!234
 
-## Demo Accounts
+## Fluxo de demo em 90 segundos
 
-These users are auto-created when demo mode is enabled.
+### 0-20s
+Entrar com demo.admin, abrir dashboard e mostrar volume, severidade e tendência de incidentes.
 
-- Admin: demo.admin / DemoAdmin!234
-- Operator: demo.operator / DemoOperator!234
-- Director: demo.director / DemoDirector!234
-- Incident Lead: demo.lead / DemoLead!234
+### 20-45s
+Entrar com demo.operator, criar ou revisar incidente para evidenciar formulário estruturado e classificação.
 
-## Repository Structure
+### 45-65s
+Entrar com demo.director ou demo.lead, validar/rejeitar incidente para mostrar controle por papel.
 
-```text
-backend/
-        app/
-                models/
-                routers/
-                schemas/
-                services/
-                utils/
-        alembic/
+### 65-90s
+Mostrar /health e trilhas administrativas para reforçar observabilidade, retenção e governança.
 
-frontend/
-        src/
-                app/
-                components/
-                config/
-                lib/
-                types/
+## Provas de engenharia
 
-docs/
-        PORTFOLIO_DEMO_STRATEGY.md
+### Segurança implementada
+- JWT com versão de token para invalidação de sessões antigas
+- Refresh token persistido e rotacionado no servidor
+- CSRF por dupla validação (cookie + header) nas rotas sensíveis de sessão
+- Bloqueio de conta após tentativas de login inválidas
+- Rate limiting por rota e por IP em middleware
+- Cabeçalhos de segurança na API (CSP, X-Frame-Options, X-Content-Type-Options, etc.)
+- Isolamento por tenant no escopo da requisição e validação de tenant no token
 
-scripts/
-```
+### Observabilidade
+- Correlação por requisição com X-Request-ID em todas as respostas
+- Logging estruturado de requisição (método, path, status, latência, IP)
+- Logs de atividade de autenticação e operações administrativas
+- Endpoint /health com estado da rotina de retenção
+- Rotina automática de retenção de auditoria com metadados da última execução
 
-## License
+### Decisões arquiteturais e trade-offs
+- Monorepo com frontend e backend separados: simplifica onboarding e demonstra ownership full stack
+- Modo demo com seed sintético: acelera avaliação técnica sem depender de dados sensíveis
+- Segurança ativa por padrão em ambiente local: aumenta credibilidade técnica para entrevista
+- Docker Compose para reprodução rápida: trade-off de não refletir toda a complexidade de deploy cloud
+- API modular por routers/schemas/services: melhora a manutenção, com custo de mais arquivos e disciplina de padrão
 
-This repository includes a public demo version of the project for portfolio use. Review the existing license file before commercial reuse.
+## O que eu entreguei como engenheiro
+
+- Estruturei uma arquitetura full stack reproduzível em ambiente local com Docker Compose para acelerar onboarding técnico.
+- Implementei autenticação com foco em segurança operacional (JWT + refresh token rotativo + CSRF + lockout + rate limit).
+- Criei trilhas de observabilidade acionáveis (X-Request-ID, logs de requisição, health com status de retenção).
+- Mantive separação clara por camadas no backend (routers, schemas, services, utils), favorecendo manutenção e evolução.
+- Entreguei fluxo de demonstração em 90 segundos para validação rápida por recrutador, tech lead e stakeholder de produto.
+
+## Pronto para entrevista técnica
+
+Checklist rápido para recrutador e entrevistador validar em poucos minutos:
+
+- [ ] Aplicação sobe com um comando: docker compose up --build
+- [ ] Login, refresh e logout funcionam com cookies de sessão e CSRF
+- [ ] Bloqueio de conta ocorre após tentativas inválidas repetidas
+- [ ] Limite de taxa retorna HTTP 429 quando estourado
+- [ ] Cabeçalho X-Request-ID presente nas respostas da API
+- [ ] Endpoint /health retorna estado de saúde e dados de retenção
+- [ ] Fluxo por perfil (operador x liderança x admin) pode ser demonstrado
+- [ ] Migrações Alembic e estrutura modular de backend são rastreáveis
+
+## Estrutura de documentação (padrão)
+
+- [docs/README.md](docs/README.md)
+- [docs/VISAO_EXECUTIVA.md](docs/VISAO_EXECUTIVA.md)
+- [docs/VISAO_TECNICA.md](docs/VISAO_TECNICA.md)
+- [docs/ROADMAP_CURTO.md](docs/ROADMAP_CURTO.md)
+
+## Licença
+
+Uso público para portfólio/demo conforme [LICENSE](LICENSE). Avalie requisitos legais antes de reutilização comercial.
