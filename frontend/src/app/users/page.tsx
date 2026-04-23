@@ -106,7 +106,7 @@ export default function UsersPage() {
   const fetchUsers = async () => {
     try {
       const response = await api.get('/api/auth/users');
-      setUsers(response.data);
+      setUsers(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Erro ao carregar usuários:', error);
     } finally {
@@ -117,7 +117,7 @@ export default function UsersPage() {
   const fetchSchools = async () => {
     try {
       const response = await api.get('/api/admin/schools?include_inactive=false');
-      setSchools(response.data);
+      setSchools(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Erro ao carregar escolas:', error);
     }
@@ -126,7 +126,7 @@ export default function UsersPage() {
   const fetchSetores = async () => {
     try {
       const response = await api.get('/api/options/categories');
-      setSetores(response.data);
+      setSetores(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Erro ao carregar setores:', error);
     }

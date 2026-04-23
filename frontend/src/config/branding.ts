@@ -10,9 +10,15 @@ export const APP_CONFIG = {
   /** Subtitle shown below the product name */
   subtitle: 'Gestão de Ocorrências',
   /** Description used in page metadata */
-  description: 'Sistema de gestão de ocorrências e casos',
+  description: 'Plataforma de gestão de ocorrências com rastreabilidade, governança e indicadores operacionais',
   /** Copyright line shown in login footer */
-  footer: `© ${new Date().getFullYear()} NexoCase`,
+  footer: `© ${new Date().getFullYear()} NexoCase · Demo Comercial`,
+  /** Commercial headline shown on demo login */
+  commercialHeadline: 'Operação previsível para times que não podem falhar',
+  /** Commercial subheadline shown on demo login */
+  commercialSubheadline: 'Centralize incidentes, ganhe rastreabilidade e acelere decisões com visão executiva em tempo real.',
+  /** Public contact shown for lead capture in demo */
+  contactEmail: 'contato@nexocase.demo',
   /** Prefix used for generated report filenames */
   reportPrefix: 'relatorio',
   /** Logo alt text */

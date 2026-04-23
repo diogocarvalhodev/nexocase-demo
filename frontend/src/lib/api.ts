@@ -48,6 +48,12 @@ const SHOWCASE_SCHOOLS = [
   { id: 3, name: 'South Annex', address: 'Austin, TX', phone: null, email: null, is_active: true },
 ];
 
+const SHOWCASE_LOCATIONS = [
+  { id: 1, name: 'SOC Console', description: 'Primary monitoring room', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+  { id: 2, name: 'Core Network', description: 'Datacenter and network backbone', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+  { id: 3, name: 'Main Gate', description: 'Physical perimeter access', is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+];
+
 const SHOWCASE_INCIDENTS = [
   {
     id: 101,
@@ -80,6 +86,11 @@ const SHOWCASE_INCIDENTS = [
     created_at: new Date(Date.now() - 7200000).toISOString(),
   },
 ];
+
+let showcaseSchools = [...SHOWCASE_SCHOOLS];
+let showcaseUsers = [...SHOWCASE_USERS];
+let showcaseIncidents = [...SHOWCASE_INCIDENTS];
+let showcaseOficioText = 'Comunicamos que o incidente foi devidamente registrado e tratado conforme o protocolo interno.';
 
 function buildShowcaseResponse(config: AxiosRequestConfig, data: any, status = 200): AxiosResponse {
   return {
@@ -126,6 +137,13 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
 
   if (method === 'post' && pathOnly === '/api/auth/logout') {
     return Promise.resolve(buildShowcaseResponse(config, { ok: true }));
+  }
+
+  if (method === 'post' && pathOnly === '/api/auth/change-password') {
+    return Promise.resolve(buildShowcaseResponse(config, {
+      ...SHOWCASE_USER,
+      must_change_password: false,
+    }));
   }
 
   if (method === 'get' && pathOnly === '/api/tenant/onboarding-status') {
@@ -180,12 +198,82 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
     ]));
   }
 
+  if (method === 'get' && pathOnly === '/api/options/locations') {
+    return Promise.resolve(buildShowcaseResponse(config, SHOWCASE_LOCATIONS));
+  }
+
   if (method === 'get' && pathOnly === '/api/schools') {
-    return Promise.resolve(buildShowcaseResponse(config, SHOWCASE_SCHOOLS));
+    return Promise.resolve(buildShowcaseResponse(config, showcaseSchools));
+  }
+
+  if (method === 'post' && pathOnly === '/api/schools') {
+    const payload = typeof config.data === 'string' ? JSON.parse(config.data || '{}') : (config.data || {});
+    const created = {
+      id: Date.now(),
+      name: payload.name || 'New Showcase Unit',
+      address: payload.address || null,
+      phone: payload.phone || null,
+      email: payload.email || null,
+      is_active: true,
+    };
+    showcaseSchools = [created, ...showcaseSchools];
+    return Promise.resolve(buildShowcaseResponse(config, created, 201));
+  }
+
+  if (method === 'put' && /^\/api\/schools\/\d+$/.test(pathOnly)) {
+    const id = Number(pathOnly.split('/').pop());
+    const payload = typeof config.data === 'string' ? JSON.parse(config.data || '{}') : (config.data || {});
+    showcaseSchools = showcaseSchools.map((school) => school.id === id ? { ...school, ...payload } : school);
+    const updated = showcaseSchools.find((school) => school.id === id);
+    return Promise.resolve(buildShowcaseResponse(config, updated || payload));
+  }
+
+  if (method === 'delete' && /^\/api\/schools\/\d+$/.test(pathOnly)) {
+    const id = Number(pathOnly.split('/').pop());
+    showcaseSchools = showcaseSchools.filter((school) => school.id !== id);
+    return Promise.resolve(buildShowcaseResponse(config, { ok: true }));
   }
 
   if (method === 'get' && pathOnly === '/api/admin/users') {
-    return Promise.resolve(buildShowcaseResponse(config, SHOWCASE_USERS));
+    return Promise.resolve(buildShowcaseResponse(config, showcaseUsers));
+  }
+
+  if (method === 'get' && pathOnly === '/api/auth/users') {
+    return Promise.resolve(buildShowcaseResponse(config, showcaseUsers));
+  }
+
+  if (method === 'post' && pathOnly === '/api/auth/register') {
+    const payload = typeof config.data === 'string' ? JSON.parse(config.data || '{}') : (config.data || {});
+    const created = {
+      id: Date.now(),
+      username: payload.username || 'new.user',
+      email: payload.email || 'new.user@nexocase.demo',
+      full_name: payload.full_name || 'New User',
+      is_active: true,
+      is_admin: false,
+      must_change_password: false,
+      role: payload.role || 'OPERADOR',
+      escola_vinculada: payload.escola_vinculada ?? null,
+      setor_vinculado: payload.setor_vinculado ?? null,
+      created_at: new Date().toISOString(),
+    };
+    showcaseUsers = [created, ...showcaseUsers];
+    return Promise.resolve(buildShowcaseResponse(config, created, 201));
+  }
+
+  if (method === 'put' && /^\/api\/auth\/users\/\d+\/toggle-active$/.test(pathOnly)) {
+    const id = Number(pathOnly.split('/')[4]);
+    showcaseUsers = showcaseUsers.map((user) => user.id === id ? { ...user, is_active: !user.is_active } : user);
+    const updated = showcaseUsers.find((user) => user.id === id);
+    return Promise.resolve(buildShowcaseResponse(config, updated || { ok: true }));
+  }
+
+  if (method === 'get' && pathOnly === '/api/admin/schools') {
+    return Promise.resolve(buildShowcaseResponse(config, SHOWCASE_SCHOOLS));
+  }
+
+  if (method === 'get' && pathOnly.startsWith('/api/admin/schools')) {
+    return Promise.resolve(buildShowcaseResponse(config, SHOWCASE_SCHOOLS));
   }
 
   if (method === 'get' && pathOnly === '/api/presets') {
@@ -290,7 +378,106 @@ function showcaseAdapter(config: AxiosRequestConfig): Promise<AxiosResponse> {
   }
 
   if (method === 'get' && pathOnly === '/api/reports/monthly') {
-    return Promise.resolve(buildShowcaseResponse(config, 'Showcase report placeholder')); 
+    const blob = new Blob(['Showcase monthly report'], { type: 'text/plain' });
+    return Promise.resolve(buildShowcaseResponse(config, blob));
+  }
+
+  if (method === 'get' && pathOnly === '/api/reports/oficio-text') {
+    return Promise.resolve(buildShowcaseResponse(config, { texto_oficio: showcaseOficioText }));
+  }
+
+  if (method === 'put' && pathOnly === '/api/reports/oficio-text') {
+    const payload = typeof config.data === 'string' ? JSON.parse(config.data || '{}') : (config.data || {});
+    showcaseOficioText = payload.texto_oficio || showcaseOficioText;
+    return Promise.resolve(buildShowcaseResponse(config, { texto_oficio: showcaseOficioText }));
+  }
+
+  if (method === 'post' && pathOnly === '/api/tenant/complete-onboarding') {
+    return Promise.resolve(buildShowcaseResponse(config, {
+      ok: true,
+      onboarding_completed: true,
+    }));
+  }
+
+  if (method === 'post' && pathOnly === '/api/incidents') {
+    const payload = typeof config.data === 'string' ? JSON.parse(config.data || '{}') : (config.data || {});
+    const school = showcaseSchools.find((item) => item.id === Number(payload.school_id));
+    const created = {
+      id: Date.now(),
+      process_number: `NC/2026/${String(showcaseIncidents.length + 1).padStart(5, '0')}`,
+      school_id: Number(payload.school_id) || 1,
+      unidade_escolar: school?.name || 'North Campus',
+      setor: payload.setor || payload.category || 'Detection',
+      operator_id: SHOWCASE_USER.id,
+      location: payload.location || 'SOC Console',
+      category: payload.category || payload.setor || 'Detection',
+      impact_level: payload.impact_level || 'Medium',
+      description: payload.description || 'Showcase generated incident',
+      actions_taken: payload.actions_taken || null,
+      status: 'Aguardando Validação',
+      pdf_path: null,
+      incident_date: payload.incident_date || new Date().toISOString(),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      resolved_at: null,
+      validated_by: null,
+      validated_at: null,
+      rejection_reason: null,
+      validation_note: null,
+      school,
+      operator: SHOWCASE_USER,
+      validator: null,
+    };
+    showcaseIncidents = [created as any, ...showcaseIncidents];
+    return Promise.resolve(buildShowcaseResponse(config, created, 201));
+  }
+
+  if (method === 'get' && /^\/api\/incidents\/\d+$/.test(pathOnly)) {
+    const id = Number(pathOnly.split('/').pop());
+    const incident = showcaseIncidents.find((item: any) => item.id === id) || showcaseIncidents[0];
+    const normalized = {
+      ...incident,
+      school_id: incident.school_id || 1,
+      operator_id: incident.operator_id || SHOWCASE_USER.id,
+      location: incident.location || 'SOC Console',
+      description: incident.description || 'Showcase incident detail',
+      actions_taken: incident.actions_taken ?? null,
+      pdf_path: incident.pdf_path ?? null,
+      updated_at: incident.updated_at || new Date().toISOString(),
+      resolved_at: incident.resolved_at ?? null,
+      school: incident.school || showcaseSchools[0],
+      operator: incident.operator || SHOWCASE_USER,
+      validator: incident.validator || null,
+    };
+    return Promise.resolve(buildShowcaseResponse(config, normalized));
+  }
+
+  if (method === 'get' && /^\/api\/incidents\/\d+\/pdf$/.test(pathOnly)) {
+    const blob = new Blob(['%PDF-1.4\n% Showcase PDF placeholder\n'], { type: 'application/pdf' });
+    return Promise.resolve(buildShowcaseResponse(config, blob));
+  }
+
+  if (method === 'post' && /^\/api\/incidents\/\d+\/regenerate-pdf$/.test(pathOnly)) {
+    return Promise.resolve(buildShowcaseResponse(config, { ok: true }));
+  }
+
+  if (method === 'post' && /^\/api\/incidents\/\d+\/approve$/.test(pathOnly)) {
+    const id = Number(pathOnly.split('/')[3]);
+    showcaseIncidents = showcaseIncidents.map((incident: any) => incident.id === id ? { ...incident, status: 'Aprovada', validated_at: new Date().toISOString() } : incident);
+    const updated = showcaseIncidents.find((incident: any) => incident.id === id);
+    return Promise.resolve(buildShowcaseResponse(config, updated || showcaseIncidents[0]));
+  }
+
+  if (method === 'post' && /^\/api\/incidents\/\d+\/reject$/.test(pathOnly)) {
+    const id = Number(pathOnly.split('/')[3]);
+    showcaseIncidents = showcaseIncidents.map((incident: any) => incident.id === id ? { ...incident, status: 'Rejeitada', validated_at: new Date().toISOString() } : incident);
+    const updated = showcaseIncidents.find((incident: any) => incident.id === id);
+    return Promise.resolve(buildShowcaseResponse(config, updated || showcaseIncidents[0]));
+  }
+
+  if (method === 'post' && /^\/api\/incidents\/\d+\/pdf-edit$/.test(pathOnly)) {
+    const blob = new Blob(['%PDF-1.4\n% Showcase edited PDF placeholder\n'], { type: 'application/pdf' });
+    return Promise.resolve(buildShowcaseResponse(config, blob));
   }
 
   return Promise.resolve(buildShowcaseResponse(config, { detail: `Showcase route not mocked: ${method.toUpperCase()} ${pathOnly}` }, 404));

@@ -6,7 +6,7 @@ import { useAuth } from '@/lib/auth';
 import NexoCaseLogo from '@/components/NexoCaseLogo';
 import { APP_CONFIG, DEMO_ACCOUNTS, DEMO_MODE } from '@/config/branding';
 import { LoginCredentials } from '@/types';
-import { AlertCircle, ShieldCheck } from 'lucide-react';
+import { AlertCircle, ShieldCheck, Building2, Activity, Handshake } from 'lucide-react';
 
 const API_URL = '/backend';
 const SHOWCASE_MODE = process.env.NEXT_PUBLIC_SHOWCASE_MODE === 'true';
@@ -90,6 +90,24 @@ export default function LoginPage() {
           <p className="text-secondary-400 mt-2 text-sm">
             {APP_CONFIG.subtitle}
           </p>
+          <p className="mt-4 text-sm font-medium text-secondary-200">
+            {APP_CONFIG.commercialHeadline}
+          </p>
+          <p className="mx-auto mt-2 max-w-sm text-xs text-secondary-400">
+            {APP_CONFIG.commercialSubheadline}
+          </p>
+
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] text-secondary-200">
+              <Building2 className="h-3.5 w-3.5" /> Multiunidade
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] text-secondary-200">
+              <Activity className="h-3.5 w-3.5" /> Auditoria completa
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] text-secondary-200">
+              <Handshake className="h-3.5 w-3.5" /> Pronto para implantação
+            </span>
+          </div>
         </div>
 
         {/* Login Card - Glassmorphism */}
@@ -153,9 +171,17 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-6 pt-6 border-t border-white/[0.08]">
-            <p className="text-xs text-secondary-500 text-center">
-              Em caso de problemas de acesso, entre em contato com o administrador do sistema.
-            </p>
+            <div className="space-y-2 text-center">
+              <p className="text-xs text-secondary-500">
+                Em caso de problemas de acesso, entre em contato com o administrador do sistema.
+              </p>
+              <a
+                href={`mailto:${APP_CONFIG.contactEmail}?subject=Interesse%20Comercial%20-%20NexoCase`}
+                className="inline-flex items-center rounded-full border border-primary-400/30 bg-primary-500/10 px-3 py-1 text-[11px] font-semibold text-primary-200 hover:bg-primary-500/20"
+              >
+                Falar com vendas: {APP_CONFIG.contactEmail}
+              </a>
+            </div>
           </div>
         </div>
 
@@ -173,7 +199,7 @@ export default function LoginPage() {
               <div>
                 <h3 className="text-sm font-semibold text-white">Public Demo Accounts</h3>
                 <p className="mt-1 text-sm text-secondary-300">
-                  This portfolio build uses synthetic data, mocked outbound notifications, and role-based demo accounts.
+                  Demo de produto com dados sintéticos, fluxos de operação e perfis de acesso para apresentação comercial.
                 </p>
               </div>
             </div>

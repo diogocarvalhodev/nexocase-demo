@@ -126,9 +126,9 @@ function IncidentsPageContent() {
         api.get('/api/options/impact-levels'),
         api.get('/api/schools')
       ]);
-      setSetores(sectorsRes.data);
-      setImpactLevels(impactRes.data);
-      setSchools(schoolsRes.data);
+      setSetores(Array.isArray(sectorsRes.data) ? sectorsRes.data : []);
+      setImpactLevels(Array.isArray(impactRes.data) ? impactRes.data : []);
+      setSchools(Array.isArray(schoolsRes.data) ? schoolsRes.data : []);
     } catch (error) {
       console.error('Erro ao carregar setores:', error);
     }
@@ -142,7 +142,7 @@ function IncidentsPageContent() {
 
     try {
       const response = await api.get('/api/auth/users');
-      setOperators(response.data || []);
+      setOperators(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Erro ao carregar operadores:', error);
     }

@@ -42,6 +42,170 @@ import { useTenantTerminology } from '@/lib/terminology';
 import { persistTenantBusinessType } from '@/lib/terminology';
 
 const API_URL = '/backend';
+const SHOWCASE_MODE = process.env.NEXT_PUBLIC_SHOWCASE_MODE === 'true';
+
+const showcaseNow = new Date().toISOString();
+const SHOWCASE_ADMIN_USER: User = {
+  id: 1,
+  username: 'admin',
+  email: 'admin@nexocase.demo',
+  full_name: 'Showcase Admin',
+  is_active: true,
+  is_admin: true,
+  must_change_password: false,
+  role: 'MASTER',
+  created_at: showcaseNow,
+};
+const SHOWCASE_ADMIN_SCHOOLS: SchoolType[] = [
+  { id: 1, name: 'North Campus', address: 'Austin, TX', phone: '(11) 4000-1001', email: 'north@nexocase.demo', is_active: true },
+  { id: 2, name: 'Operations Center', address: 'Austin, TX', phone: '(11) 4000-1002', email: 'ops@nexocase.demo', is_active: true },
+  { id: 3, name: 'South Annex', address: 'Austin, TX', phone: '(11) 4000-1003', email: 'south@nexocase.demo', is_active: false },
+];
+const SHOWCASE_ADMIN_CATEGORIES: Category[] = [
+  { id: 1, name: 'Detection', description: 'Detection incidents', color: '#3b82f6', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 2, name: 'Infrastructure', description: 'Infrastructure and uptime', color: '#f59e0b', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 3, name: 'Access Control', description: 'Identity and access', color: '#10b981', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+];
+const SHOWCASE_ADMIN_LOCATIONS: Location[] = [
+  { id: 1, name: 'SOC Console', description: 'Monitoring center', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 2, name: 'Core Network', description: 'Datacenter and backbone', is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 3, name: 'Main Gate', description: 'Perimeter access', is_active: false, created_at: showcaseNow, updated_at: showcaseNow },
+];
+const SHOWCASE_ADMIN_IMPACT_LEVELS: ImpactLevel[] = [
+  { id: 1, name: 'Low', description: 'Low impact', color: '#22c55e', severity: 1, is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 2, name: 'Medium', description: 'Moderate impact', color: '#f59e0b', severity: 2, is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+  { id: 3, name: 'High', description: 'High impact', color: '#ef4444', severity: 3, is_active: true, created_at: showcaseNow, updated_at: showcaseNow },
+];
+const SHOWCASE_ADMIN_USERS: User[] = [
+  SHOWCASE_ADMIN_USER,
+  { id: 2, username: 'demo.operator', email: 'operator@nexocase.demo', full_name: 'SOC Operator', is_active: true, is_admin: false, must_change_password: false, role: 'OPERADOR', created_at: showcaseNow },
+  { id: 3, username: 'demo.director', email: 'director@nexocase.demo', full_name: 'Operations Director', is_active: true, is_admin: false, must_change_password: false, role: 'DIRETOR', escola_vinculada: 1, created_at: showcaseNow },
+  { id: 4, username: 'demo.manager', email: 'manager@nexocase.demo', full_name: 'Sector Manager', is_active: false, is_admin: false, must_change_password: false, role: 'GESTOR_SETOR', setor_vinculado: 'Infrastructure', created_at: showcaseNow },
+];
+const SHOWCASE_ADMIN_LOGS: ActivityLog[] = [
+  { id: 1, user_id: 1, action: 'LOGIN', entity_type: 'auth', entity_id: null, description: 'Successful login', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Showcase Admin' },
+  { id: 2, user_id: 1, action: 'UPDATE', entity_type: 'config', entity_id: 11, description: 'Updated retention interval', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Showcase Admin' },
+  { id: 3, user_id: 2, action: 'CREATE', entity_type: 'incident', entity_id: 101, description: 'Created incident NC/2026/00001', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'SOC Operator' },
+  { id: 4, user_id: 3, action: 'APPROVE', entity_type: 'incident', entity_id: 102, description: 'Approved incident NC/2026/00002', ip_address: '127.0.0.1', created_at: showcaseNow, user_name: 'Operations Director' },
+];
+const SHOWCASE_ADMIN_CONFIGS: SystemConfig[] = [
+  { id: 1, key: 'audit_retention_enabled', value: 'true', description: 'Enable retention schedule', updated_at: showcaseNow, updated_by: 1 },
+  { id: 2, key: 'audit_retention_last_status', value: 'success', description: 'Last retention status', updated_at: showcaseNow, updated_by: 1 },
+  { id: 3, key: 'audit_retention_last_trigger', value: 'schedule', description: 'Last trigger source', updated_at: showcaseNow, updated_by: 1 },
+  { id: 4, key: 'audit_retention_last_run_at', value: showcaseNow, description: 'Last execution timestamp', updated_at: showcaseNow, updated_by: 1 },
+  { id: 5, key: 'audit_retention_last_started_at', value: showcaseNow, description: 'Last start timestamp', updated_at: showcaseNow, updated_by: 1 },
+  { id: 6, key: 'audit_retention_last_finished_at', value: showcaseNow, description: 'Last finish timestamp', updated_at: showcaseNow, updated_by: 1 },
+  { id: 7, key: 'audit_retention_last_cutoff_utc', value: showcaseNow, description: 'Last retention cutoff', updated_at: showcaseNow, updated_by: 1 },
+  { id: 8, key: 'audit_retention_last_anonymized_count', value: '18', description: 'Anonymized logs', updated_at: showcaseNow, updated_by: 1 },
+  { id: 9, key: 'audit_retention_last_removed_refresh_count', value: '9', description: 'Removed refresh tokens', updated_at: showcaseNow, updated_by: 1 },
+  { id: 10, key: 'oficio_header_1', value: 'NexoCase Incident Operations', description: 'Header line 1', updated_at: showcaseNow, updated_by: 1 },
+  { id: 11, key: 'oficio_header_2', value: 'Executive Response Center', description: 'Header line 2', updated_at: showcaseNow, updated_by: 1 },
+  { id: 12, key: 'oficio_footer', value: 'Documento gerado automaticamente pelo NexoCase', description: 'Footer text', updated_at: showcaseNow, updated_by: 1 },
+  { id: 13, key: 'smtp_host', value: 'smtp.showcase.local', description: 'SMTP host', updated_at: showcaseNow, updated_by: 1 },
+  { id: 14, key: 'smtp_port', value: '587', description: 'SMTP port', updated_at: showcaseNow, updated_by: 1 },
+  { id: 15, key: 'email_from', value: 'no-reply@nexocase.demo', description: 'Sender email', updated_at: showcaseNow, updated_by: 1 },
+];
+const SHOWCASE_RETENTION_HEALTH: AuditRetentionHealth = {
+  status: 'healthy',
+  message: 'Retention job executed within expected interval.',
+  schedule_enabled: true,
+  interval_hours: 24,
+  max_expected_delay_hours: 30,
+  is_stale: false,
+  last_run_at: showcaseNow,
+  next_expected_run_at: showcaseNow,
+  last_status: 'success',
+  last_error: null,
+};
+const SHOWCASE_TENANT_PROFILE: TenantProfile = {
+  id: 1,
+  name: 'NexoCase Showcase Tenant',
+  slug: 'default',
+  is_active: true,
+  business_type: 'education',
+  onboarding_completed: true,
+  onboarding_completed_at: showcaseNow,
+  ui_config: {
+    app_name: 'NexoCase Showcase',
+    subtitle: 'Incident Operations Demo',
+    primary_color: '#0f766e',
+    accent_color: '#f59e0b',
+  },
+};
+const SHOWCASE_ACTIVE_INCIDENTS: Incident[] = [
+  {
+    id: 101,
+    process_number: 'NC/2026/00001',
+    school_id: 1,
+    unidade_escolar: 'North Campus',
+    setor: 'Detection',
+    operator_id: 2,
+    location: 'SOC Console',
+    category: 'Detection',
+    impact_level: 'High',
+    description: 'Unusual authentication burst detected.',
+    actions_taken: 'Blocked suspicious IP range.',
+    status: 'Aguardando Validação',
+    pdf_path: null,
+    incident_date: showcaseNow,
+    created_at: showcaseNow,
+    updated_at: showcaseNow,
+    resolved_at: null,
+    validated_by: null,
+    validated_at: null,
+    rejection_reason: null,
+    validation_note: null,
+    school: SHOWCASE_ADMIN_SCHOOLS[0],
+    operator: SHOWCASE_ADMIN_USERS[1],
+    validator: null,
+  },
+  {
+    id: 102,
+    process_number: 'NC/2026/00002',
+    school_id: 2,
+    unidade_escolar: 'Operations Center',
+    setor: 'Infrastructure',
+    operator_id: 2,
+    location: 'Core Network',
+    category: 'Infrastructure',
+    impact_level: 'Critical',
+    description: 'Core switch failover event.',
+    actions_taken: 'Traffic rerouted and node replaced.',
+    status: 'Aprovada',
+    pdf_path: '/tmp/showcase.pdf',
+    incident_date: showcaseNow,
+    created_at: showcaseNow,
+    updated_at: showcaseNow,
+    resolved_at: null,
+    validated_by: 3,
+    validated_at: showcaseNow,
+    rejection_reason: null,
+    validation_note: 'Risk contained.',
+    school: SHOWCASE_ADMIN_SCHOOLS[1],
+    operator: SHOWCASE_ADMIN_USERS[1],
+    validator: SHOWCASE_ADMIN_USERS[2],
+  },
+];
+const SHOWCASE_ARCHIVED_INCIDENTS: Incident[] = [
+  {
+    ...SHOWCASE_ACTIVE_INCIDENTS[1],
+    id: 88,
+    process_number: 'NC/2025/00088',
+    status: 'Fechado',
+    resolved_at: showcaseNow,
+  },
+];
+const SHOWCASE_ADMIN_STATS: AdminStats = {
+  total_users: SHOWCASE_ADMIN_USERS.length,
+  active_users: SHOWCASE_ADMIN_USERS.filter((item) => item.is_active).length,
+  total_schools: SHOWCASE_ADMIN_SCHOOLS.length,
+  active_schools: SHOWCASE_ADMIN_SCHOOLS.filter((item) => item.is_active).length,
+  total_incidents: SHOWCASE_ACTIVE_INCIDENTS.length,
+  archived_incidents: SHOWCASE_ARCHIVED_INCIDENTS.length,
+  total_categories: SHOWCASE_ADMIN_CATEGORIES.length,
+  total_locations: SHOWCASE_ADMIN_LOCATIONS.length,
+  total_impact_levels: SHOWCASE_ADMIN_IMPACT_LEVELS.length,
+};
 
 type TabType = 'overview' | 'schools' | 'categories' | 'locations' | 'impact-levels' | 'users' | 'archive' | 'logs' | 'config';
 
@@ -159,6 +323,12 @@ export default function AdminPage() {
   });
 
   const loadStats = async () => {
+    if (SHOWCASE_MODE) {
+      setStats(SHOWCASE_ADMIN_STATS);
+      setRecentLogs(SHOWCASE_ADMIN_LOGS.slice(0, 5));
+      return;
+    }
+
     try {
       const res = await fetch(`${API_URL}/api/admin/stats`, { headers: getAuthHeaders() });
       if (res.ok) {
@@ -196,6 +366,11 @@ export default function AdminPage() {
     reader.readAsDataURL(file);
 
     // Upload para servidor
+    if (SHOWCASE_MODE) {
+      alert('Logo atualizada (simulação showcase).');
+      return;
+    }
+
     setUploadingLogo(true);
     try {
       const formData = new FormData();
@@ -228,16 +403,26 @@ export default function AdminPage() {
     if (!confirm('Tem certeza que deseja salvar esta configuração?')) return;
     const typed = prompt(`Digite ${confirmText} para confirmar:`);
     if (typed !== confirmText) return;
-    await fetch(`${API_URL}/api/admin/config/${key}`, {
-      method: 'PUT',
-      headers: getAuthHeaders(),
-      body: JSON.stringify({ value })
-    });
+    if (SHOWCASE_MODE) {
+      setConfigs((prev) => prev.map((config) => config.key === key ? { ...config, value: value ?? null, updated_at: new Date().toISOString() } : config));
+    } else {
+      await fetch(`${API_URL}/api/admin/config/${key}`, {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ value })
+      });
+    }
     alert('Configuração salva!');
   };
 
   const handleSaveTenantConfig = async () => {
     if (!tenantConfig) return;
+    if (SHOWCASE_MODE) {
+      setTenantProfile((prev) => prev ? ({ ...prev, ui_config: tenantConfig }) : prev);
+      alert('Configuração visual atualizada (simulação showcase).');
+      return;
+    }
+
     setSavingTenantConfig(true);
     try {
       const res = await fetch(`${API_URL}/api/tenant/ui-config`, {
@@ -259,6 +444,18 @@ export default function AdminPage() {
 
   const handleApplyTenantPreset = async (preset: 'education' | 'condominium' | 'shopping') => {
     if (!confirm(`Aplicar preset ${preset}? Isso substitui categorias, localizações e níveis de impacto ativos.`)) {
+      return;
+    }
+
+    if (SHOWCASE_MODE) {
+      const updatedTenant = {
+        ...SHOWCASE_TENANT_PROFILE,
+        business_type: preset,
+      };
+      setTenantProfile(updatedTenant);
+      setTenantConfig(updatedTenant.ui_config);
+      persistTenantBusinessType(updatedTenant.business_type || preset);
+      alert('Preset aplicado com sucesso (simulação showcase).');
       return;
     }
 
@@ -286,6 +483,42 @@ export default function AdminPage() {
   };
 
   const loadData = async (tab: TabType) => {
+    if (SHOWCASE_MODE) {
+      switch (tab) {
+        case 'schools':
+          setSchools(SHOWCASE_ADMIN_SCHOOLS);
+          break;
+        case 'categories':
+          setCategories(SHOWCASE_ADMIN_CATEGORIES);
+          break;
+        case 'locations':
+          setLocations(SHOWCASE_ADMIN_LOCATIONS);
+          break;
+        case 'impact-levels':
+          setImpactLevels(SHOWCASE_ADMIN_IMPACT_LEVELS);
+          break;
+        case 'users':
+          setUsers(SHOWCASE_ADMIN_USERS);
+          break;
+        case 'logs':
+          setActivityLogs(SHOWCASE_ADMIN_LOGS);
+          break;
+        case 'config':
+          setConfigs(SHOWCASE_ADMIN_CONFIGS);
+          setRetentionHealth(SHOWCASE_RETENTION_HEALTH);
+          setTenantProfile(SHOWCASE_TENANT_PROFILE);
+          setTenantConfig(SHOWCASE_TENANT_PROFILE.ui_config);
+          break;
+        case 'archive':
+          setActiveIncidents(SHOWCASE_ACTIVE_INCIDENTS);
+          setArchivedIncidents(SHOWCASE_ARCHIVED_INCIDENTS);
+          break;
+        default:
+          break;
+      }
+      return;
+    }
+
     const headers = getAuthHeaders();
     try {
       switch (tab) {
@@ -342,6 +575,12 @@ export default function AdminPage() {
   };
 
   const refreshRetentionStatus = async () => {
+    if (SHOWCASE_MODE) {
+      setConfigs(SHOWCASE_ADMIN_CONFIGS);
+      setRetentionHealth(SHOWCASE_RETENTION_HEALTH);
+      return;
+    }
+
     setRefreshingRetentionStatus(true);
     try {
       const headers = getAuthHeaders();
@@ -363,6 +602,11 @@ export default function AdminPage() {
   };
 
   const ensureSchoolsLoaded = async () => {
+    if (SHOWCASE_MODE) {
+      if (schools.length === 0) setSchools(SHOWCASE_ADMIN_SCHOOLS);
+      return;
+    }
+
     if (schools.length > 0) return;
 
     try {
@@ -378,6 +622,11 @@ export default function AdminPage() {
   };
 
   const ensureCategoriesLoaded = async () => {
+    if (SHOWCASE_MODE) {
+      if (categories.length === 0) setCategories(SHOWCASE_ADMIN_CATEGORIES);
+      return;
+    }
+
     if (categories.length > 0) return;
 
     try {
