@@ -148,7 +148,7 @@ export default function NewIncidentPage() {
     <div className="min-h-screen bg-secondary-50">
       <Sidebar />
 
-      <main className="lg:ml-64 p-6 lg:p-8">
+      <main className="app-main">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-secondary-900">Nova {terms.incidentSingular}</h1>
@@ -338,3 +338,4 @@ export default function NewIncidentPage() {
     </div>
   );
 }
+

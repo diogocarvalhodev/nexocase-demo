@@ -61,7 +61,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-secondary-950">
+    <div className="min-h-screen flex items-center justify-center px-4 py-8 sm:py-10 relative overflow-hidden bg-secondary-950">
       {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 -left-40 w-80 h-80 bg-primary-600 rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-blob" />
@@ -74,7 +74,7 @@ export default function LoginPage() {
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
-        <div className="text-center mb-8 animate-fade-in">
+        <div className="text-center mb-6 sm:mb-8 animate-fade-in">
           {logoUrl ? (
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 mb-4 p-3 shadow-2xl">
               <img src={logoUrl} alt={APP_CONFIG.logoAlt} className="w-full h-full object-contain" />
@@ -84,7 +84,7 @@ export default function LoginPage() {
               <NexoCaseLogo size={52} />
             </div>
           )}
-          <h1 className="text-3xl font-bold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             {APP_CONFIG.name}
           </h1>
           <p className="text-secondary-400 mt-2 text-sm">
@@ -111,8 +111,8 @@ export default function LoginPage() {
         </div>
 
         {/* Login Card - Glassmorphism */}
-        <div className="bg-white/[0.08] backdrop-blur-2xl rounded-2xl border border-white/[0.12] shadow-2xl shadow-black/20 p-8 animate-scale-in">
-          <h2 className="text-lg font-semibold text-white mb-6 text-center">
+        <div className="bg-white/[0.08] backdrop-blur-2xl rounded-2xl border border-white/[0.12] shadow-2xl shadow-black/20 p-5 sm:p-8 animate-scale-in">
+          <h2 className="text-lg font-semibold text-white mb-5 sm:mb-6 text-center">
             Acesso ao Sistema
           </h2>
 
@@ -123,7 +123,7 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
             <div className="w-full">
               <label htmlFor="username" className="block text-sm font-medium text-secondary-300 mb-1.5">
                 Usuário
@@ -186,7 +186,7 @@ export default function LoginPage() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-secondary-600 text-sm mt-8">
+        <p className="text-center text-secondary-600 text-sm mt-6 sm:mt-8">
           {APP_CONFIG.footer}
         </p>
 

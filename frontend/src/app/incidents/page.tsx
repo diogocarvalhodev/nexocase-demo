@@ -198,9 +198,9 @@ function IncidentsPageContent() {
     <div className="min-h-screen bg-secondary-50">
       <Sidebar />
 
-      <main className="lg:ml-64 p-6 lg:p-8">
+      <main className="app-main">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-3">
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <h1 className="text-2xl font-bold text-secondary-900">{terms.incidentPlural}</h1>
@@ -213,7 +213,7 @@ function IncidentsPageContent() {
             </p>
           </div>
           <Link href="/incidents/new">
-            <Button className="mt-4 sm:mt-0">
+            <Button className="mt-0 w-full sm:w-auto">
               <Plus className="h-4 w-4 mr-2" />
               Nova {terms.incidentSingular}
             </Button>
@@ -611,7 +611,7 @@ function IncidentsPageContent() {
                 </div>
 
                 {/* Results count */}
-                <div className="px-6 py-3 border-t border-secondary-100 bg-secondary-50/50">
+                <div className="px-4 sm:px-6 py-3 border-t border-secondary-100 bg-secondary-50/50">
                   <p className="text-xs text-secondary-500">
                     Mostrando {incidents.length} {incidents.length === 1 ? terms.incidentSingular.toLowerCase() : terms.incidentPlural.toLowerCase()}
                   </p>
@@ -632,3 +632,4 @@ export default function IncidentsPage() {
     </Suspense>
   );
 }
+

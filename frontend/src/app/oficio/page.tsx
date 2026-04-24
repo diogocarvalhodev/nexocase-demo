@@ -78,7 +78,7 @@ export default function OficioPage() {
     <div className="min-h-screen bg-secondary-50">
       <Sidebar />
 
-      <main className="lg:ml-64 p-6 lg:p-8">
+      <main className="app-main">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold text-secondary-900">Texto do Ofício</h1>
@@ -119,3 +119,4 @@ export default function OficioPage() {
     </div>
   );
 }
+

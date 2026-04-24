@@ -474,7 +474,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-secondary-50">
         <Sidebar />
-        <main className="lg:ml-64 p-6 lg:p-8">
+        <main className="app-main">
           <div className="mb-8">
             <div className="h-8 w-40 skeleton rounded-lg mb-2" />
             <div className="h-4 w-64 skeleton rounded-lg" />
@@ -489,9 +489,9 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-secondary-50">
       <Sidebar />
 
-      <main className="lg:ml-64 p-6 lg:p-8">
+      <main className="app-main">
         {/* Hero Header */}
-        <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 p-6 lg:p-8 shadow-lg shadow-primary-600/10">
+        <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 p-4 sm:p-6 lg:p-8 shadow-lg shadow-primary-600/10">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/3" />
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/3" />
           <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -499,7 +499,7 @@ export default function DashboardPage() {
               <p className="text-primary-200 text-sm font-medium mb-1">
                 {new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}
               </p>
-              <h1 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
                 Olá, {currentUser?.full_name?.split(' ')[0] || 'Usuário'} 👋
               </h1>
               <p className="text-primary-200 mt-1 text-sm">
@@ -509,7 +509,7 @@ export default function DashboardPage() {
             <Button
               onClick={handleDownloadReport}
               disabled={downloadingReport}
-              className="bg-white/15 hover:bg-white/25 border border-white/20 text-white backdrop-blur-sm shadow-none"
+              className="w-full sm:w-auto bg-white/15 hover:bg-white/25 border border-white/20 text-white backdrop-blur-sm shadow-none"
             >
               <Download className={`h-4 w-4 mr-2 ${downloadingReport ? 'animate-spin' : ''}`} />
               {downloadingReport ? 'Gerando...' : 'Relatório'}
@@ -706,7 +706,7 @@ export default function DashboardPage() {
                 />
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <Button className="w-full" onClick={handleSavePreset} disabled={savingPreset}>
                   {savingPreset ? 'Salvando...' : 'Salvar'}
                 </Button>

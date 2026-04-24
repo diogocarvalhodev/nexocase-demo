@@ -137,7 +137,7 @@ export default function IncidentDetailPage() {
     return (
       <div className="min-h-screen bg-secondary-50">
         <Sidebar />
-        <main className="lg:ml-64 p-6 lg:p-8">
+        <main className="app-main">
           <div className="space-y-6 animate-fade-in">
             <div className="h-4 w-48 skeleton rounded-lg" />
             <div className="h-8 w-64 skeleton rounded-lg" />
@@ -164,7 +164,7 @@ export default function IncidentDetailPage() {
     return (
       <div className="min-h-screen bg-secondary-50">
         <Sidebar />
-        <main className="lg:ml-64 p-6 lg:p-8">
+        <main className="app-main">
           <div className="text-center py-12">
             <AlertCircle className="h-12 w-12 text-red-400 mx-auto mb-4" />
             <p className="text-secondary-600">{terms.incidentSingular} não encontrada</p>
@@ -232,7 +232,7 @@ export default function IncidentDetailPage() {
     <div className="min-h-screen bg-secondary-50">
       <Sidebar />
 
-      <main className="lg:ml-64 p-6 lg:p-8">
+      <main className="app-main">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm mb-6">
           <button onClick={() => router.push('/dashboard')} className="text-secondary-400 hover:text-secondary-600 transition-colors">Painel</button>

@@ -1194,8 +1194,8 @@ export default function AdminPage() {
     <div className="min-h-screen bg-secondary-50">
       {/* Header */}
       <header className="bg-gradient-to-r from-secondary-900 via-secondary-800 to-secondary-900 shadow-lg sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3 sm:gap-4">
             <div className="p-2.5 bg-white/10 backdrop-blur rounded-xl ring-1 ring-white/20">
               <Settings className="w-6 h-6 text-primary-400" />
             </div>
@@ -1204,7 +1204,7 @@ export default function AdminPage() {
               <p className="text-sm text-secondary-400">NexoCase - Gestão do Sistema</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 self-end sm:self-auto">
             <button
               onClick={() => router.push('/dashboard')}
               className="px-4 py-2 text-sm text-secondary-300 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200"
@@ -1222,14 +1222,15 @@ export default function AdminPage() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="flex gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
           {/* Sidebar */}
-          <aside className="w-64 flex-shrink-0">
-            <nav className="bg-gradient-to-b from-secondary-900 via-secondary-850 to-secondary-900 rounded-2xl shadow-lg p-3 sticky top-24 ring-1 ring-secondary-700/50">
+          <aside className="w-full lg:w-64 flex-shrink-0">
+            <nav className="bg-gradient-to-b from-secondary-900 via-secondary-850 to-secondary-900 rounded-2xl shadow-lg p-3 lg:sticky lg:top-24 ring-1 ring-secondary-700/50 overflow-x-auto">
               <div className="px-3 py-2 mb-2">
                 <p className="text-xs font-semibold text-secondary-500 uppercase tracking-wider">Menu</p>
               </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-1">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -1245,6 +1246,7 @@ export default function AdminPage() {
                   {activeTab === tab.id && <ChevronRight className="w-4 h-4 ml-auto text-primary-400" />}
                 </button>
               ))}
+              </div>
             </nav>
           </aside>
 
@@ -1284,9 +1286,9 @@ export default function AdminPage() {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                   <div className="group bg-white p-6 rounded-2xl shadow-sm border border-secondary-200/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                       <div className="p-3 bg-blue-100 rounded-2xl group-hover:scale-110 transition-transform duration-300">
                         <Users className="w-6 h-6 text-primary-600" />
                       </div>
@@ -1329,7 +1331,7 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                   <div className="group bg-white p-6 rounded-2xl shadow-sm border border-secondary-200/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                     <div className="flex items-center gap-4">
                       <div className="p-3 bg-purple-100 rounded-2xl group-hover:scale-110 transition-transform duration-300">
@@ -1482,8 +1484,8 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-hidden">
-                  <table className="w-full table-striped">
+                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-x-auto">
+                  <table className="w-full min-w-[860px] table-striped">
                     <thead className="bg-secondary-50/80">
                       <tr>
                         <th className="px-4 py-3 text-center text-sm font-medium text-secondary-600">
@@ -1588,9 +1590,9 @@ export default function AdminPage() {
             {/* Categories Tab */}
             {activeTab === 'categories' && (
               <div className="space-y-5 animate-fade-in">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <h2 className="text-2xl font-bold text-secondary-900 tracking-tight">{terms.sectorPlural}</h2>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                     <label className="flex items-center gap-2 text-sm">
                       <input
                         type="checkbox"
@@ -1610,7 +1612,7 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                   {filteredCategoriesList.map((cat) => (
                     <div
                       key={cat.id}
@@ -1658,9 +1660,9 @@ export default function AdminPage() {
             {/* Locations Tab */}
             {activeTab === 'locations' && (
               <div className="space-y-5 animate-fade-in">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <h2 className="text-2xl font-bold text-secondary-900 tracking-tight">Localizações</h2>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                     <label className="flex items-center gap-2 text-sm">
                       <input
                         type="checkbox"
@@ -1680,7 +1682,7 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                   {filteredLocationsList.map((loc) => (
                     <div
                       key={loc.id}
@@ -1725,9 +1727,9 @@ export default function AdminPage() {
             {/* Impact Levels Tab */}
             {activeTab === 'impact-levels' && (
               <div className="space-y-5 animate-fade-in">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <h2 className="text-2xl font-bold text-secondary-900 tracking-tight">Níveis de Impacto</h2>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                     <label className="flex items-center gap-2 text-sm">
                       <input
                         type="checkbox"
@@ -1747,7 +1749,7 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                   {filteredImpactLevelsList.map((level) => (
                     <div
                       key={level.id}
@@ -1793,9 +1795,9 @@ export default function AdminPage() {
             {/* Users Tab */}
             {activeTab === 'users' && (
               <div className="space-y-5 animate-fade-in">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <h2 className="text-2xl font-bold text-secondary-900 tracking-tight">Usuários</h2>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                     <label className="flex items-center gap-2 text-sm">
                       <input
                         type="checkbox"
@@ -1846,8 +1848,8 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-hidden">
-                  <table className="w-full table-striped">
+                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-x-auto">
+                  <table className="w-full min-w-[980px] table-striped">
                     <thead className="bg-secondary-50/80">
                       <tr>
                         <th className="px-4 py-3 text-center text-sm font-medium text-secondary-600">
@@ -1987,7 +1989,7 @@ export default function AdminPage() {
                       </div>
                     </div>
 
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-3">
                       <button
                         onClick={handleArchiveSelected}
                         disabled={selectedActiveIncidentIds.length === 0}
@@ -2034,7 +2036,7 @@ export default function AdminPage() {
                   <h3 className="text-lg font-semibold text-secondary-900 mb-4">
                     Estatísticas
                   </h3>
-                  <div className="grid grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                     <div className="p-4 bg-primary-50 rounded-xl">
                       <p className="text-sm text-primary-600">{terms.incidentPlural} Ativas</p>
                       <p className="text-3xl font-bold text-primary-700">{stats?.total_incidents || 0}</p>
@@ -2046,11 +2048,11 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-x-auto">
                   <div className="px-4 py-3 border-b bg-secondary-50">
                     <h3 className="text-sm font-semibold text-secondary-700">{terms.incidentPlural} Ativas (para arquivar)</h3>
                   </div>
-                  <table className="w-full table-striped">
+                  <table className="w-full min-w-[900px] table-striped">
                     <thead className="bg-secondary-50/80">
                       <tr>
                         <th className="px-4 py-3 text-center text-sm font-medium text-secondary-600">
@@ -2127,11 +2129,11 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-x-auto">
                   <div className="px-4 py-3 border-b bg-secondary-50">
                     <h3 className="text-sm font-semibold text-secondary-700">{terms.incidentPlural} Arquivadas</h3>
                   </div>
-                  <table className="w-full table-striped">
+                  <table className="w-full min-w-[900px] table-striped">
                     <thead className="bg-secondary-50/80">
                       <tr>
                         <th className="px-4 py-3 text-center text-sm font-medium text-secondary-600">
@@ -2213,12 +2215,12 @@ export default function AdminPage() {
             {/* Logs Tab */}
             {activeTab === 'logs' && (
               <div className="space-y-5 animate-fade-in">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <h2 className="text-2xl font-bold text-secondary-900 tracking-tight">Log de Atividades</h2>
                     <p className="text-sm text-secondary-500 mt-1">Acompanhe todas as ações realizadas no sistema</p>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                     <button
                       onClick={handleExportLogsCSV}
                       className="flex items-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all hover:shadow-md active:scale-[0.98]"
@@ -2236,8 +2238,8 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-hidden">
-                  <table className="w-full table-striped">
+                <div className="bg-white rounded-2xl shadow-sm border border-secondary-200/60 overflow-x-auto">
+                  <table className="w-full min-w-[920px] table-striped">
                     <thead className="bg-secondary-50/80">
                       <tr>
                         <th className="px-5 py-3.5 text-left text-xs font-semibold text-secondary-600 uppercase tracking-wider">Data/Hora</th>
