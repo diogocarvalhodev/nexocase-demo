@@ -1223,14 +1223,14 @@ export default function AdminPage() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
+        <div className="flex flex-col xl:flex-row gap-4 xl:gap-6">
           {/* Sidebar */}
-          <aside className="w-full lg:w-64 flex-shrink-0">
-            <nav className="bg-gradient-to-b from-secondary-900 via-secondary-850 to-secondary-900 rounded-2xl shadow-lg p-3 lg:sticky lg:top-24 ring-1 ring-secondary-700/50 overflow-x-auto">
+          <aside className="w-full xl:w-72 flex-shrink-0">
+            <nav className="bg-gradient-to-b from-secondary-900 via-secondary-850 to-secondary-900 rounded-2xl shadow-lg p-3 xl:sticky xl:top-24 ring-1 ring-secondary-700/50 overflow-x-auto">
               <div className="px-3 py-2 mb-2">
                 <p className="text-xs font-semibold text-secondary-500 uppercase tracking-wider">Menu</p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-1">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -1252,8 +1252,8 @@ export default function AdminPage() {
 
           {/* Main Content */}
           <main className="flex-1 min-w-0">
-            <div className="mb-5 bg-white rounded-2xl shadow-sm border border-secondary-200/60 p-4 flex items-center gap-3">
-              <div className="p-2 bg-secondary-100 rounded-xl">
+            <div className="mb-5 bg-white rounded-2xl shadow-sm border border-secondary-200/60 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+              <div className="p-2 bg-secondary-100 rounded-xl shrink-0">
                 <Search className="w-4 h-4 text-secondary-500" />
               </div>
               <input
@@ -1261,12 +1261,12 @@ export default function AdminPage() {
                 value={globalSearch}
                 onChange={(e) => setGlobalSearch(e.target.value)}
                 placeholder={`Buscar em ${terms.unitPlural.toLowerCase()}, usuarios, ${terms.sectorPlural.toLowerCase()}, logs...`}
-                className="flex-1 px-3 py-2.5 border border-secondary-200 rounded-xl focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 hover:border-secondary-400 transition-colors bg-secondary-50/50 text-sm"
+                className="w-full sm:flex-1 min-w-0 px-3 py-2.5 border border-secondary-200 rounded-xl focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 hover:border-secondary-400 transition-colors bg-secondary-50/50 text-sm"
               />
               {globalSearch ? (
                 <button
                   onClick={() => setGlobalSearch('')}
-                  className="px-3 py-1.5 text-sm text-secondary-500 hover:text-secondary-700 hover:bg-secondary-100 rounded-xl transition-colors"
+                  className="w-full sm:w-auto px-3 py-1.5 text-sm text-secondary-500 hover:text-secondary-700 hover:bg-secondary-100 rounded-xl transition-colors"
                 >
                   Limpar
                 </button>
