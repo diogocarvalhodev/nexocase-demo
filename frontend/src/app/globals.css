@@ -15,7 +15,7 @@
 
 @layer components {
   .app-main {
-    @apply min-h-screen pr-4 pl-16 pt-20 pb-6 sm:px-6 sm:pt-24 lg:ml-64 lg:p-8;
+    @apply min-h-screen w-full max-w-5xl mx-auto px-4 pt-20 pb-6 sm:px-6 sm:pt-24 lg:ml-64 lg:max-w-none lg:mx-0 lg:p-8;
   }
 
   .page-container {
